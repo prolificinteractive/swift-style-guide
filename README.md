@@ -30,6 +30,46 @@ func arrays()
 
 ```
 
+### Self ###
+
+Never use the `self` modifier except in cases where it is necessary by the compiler or to alleviate conflicts
+with other variable declarations.
+
+```swift
+
+class Object
+{
+	private var name = ""
+	
+	func useName()
+	{
+		// Let self be implied when it can be understood.
+		otherObject.doSomethingWithName(name)
+		setName("Will Smith")
+	}
+	
+	func setName(name: String)
+	{
+		// Use self here to prevent conflicts with the `name` parameter being passed.
+		self.name
+	}
+	
+	func setNameAsync(newName: String)
+	{
+		// Use implicit self outside closures...
+		otherObject.doSomethingWithName(name, then: { 
+			// .. but within, you must use self to ease the compiler.
+			self.setName("Jason")
+		})
+	}
+}
+
+```
+
+*Rationale*: The idea behind this is that implicit use of self makes the conditions where you _must_ use self
+(for instance, within closures) much more apparent and will make you think more on the reasons why you are using it.
+In closures, think about: should `self` be `weak` instead of `strong`?
+
 ### Force Unwrap ###
 
 Unless there is a situation that absolutely calls for it, usage of the force-unwrap operator `(!)` should
