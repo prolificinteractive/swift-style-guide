@@ -38,9 +38,6 @@ safer and simpler to declare variables as optional and unwrap them when needing 
 to force-unwrap them and potentially introduce runtime errors into the code base.
 
 ```swift
-@IBOutlet private weak var textLabel: UILabel?
-
-...
 
 if let text = self.textLabel?.text {
     doSomethingWithText(text)
@@ -50,6 +47,14 @@ if let text = self.textLabel?.text {
 
 If you are interoping from Objective-C and the declaration automatically translates into force-unwrapped 
 parameters, replace them with `?` parameters instead.
+
+The one exception to this rule are IBOutlets. @IBOutlets may be declared using `!` so long as they are expected
+to exist for the lifetime of the view controller object:
+
+```swift
+@IBOutlet private weak var textLabel: UILabel!
+
+```
 
 
 ### Access Modifiers ###
