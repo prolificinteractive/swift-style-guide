@@ -3,7 +3,10 @@
 This is Prolific's style guide for writing code using Swift.
 
 The purpose of this guide is to develop a universal standard for Swift code that makes our codebases
-consistent and easy to read. 
+consistent and easy to read.
+
+This is a work in progress.
+If there is anything you are looking for that is not covered here you should refer to [Github's style guide](https://github.com/github/swift-style-guide).
 
 ----
 
@@ -12,7 +15,7 @@ consistent and easy to read.
 For declaring variables, favor `let` instead of `var` unless you need a mutable object or container.
 
 ```swift
-func formatDate(date: NSDate) -> String 
+func formatDate(date: NSDate) -> String
 {
     let dateFormatter = NSDateFormatter() // In this case, use `let` since the variable `dateFormatter` never changes once set
     dateFormatter.dateStyle = .ShortStyle
@@ -34,7 +37,7 @@ func arrays()
 
 Unless there is a situation that absolutely calls for it, usage of the force-unwrap operator `(!)` should
 be minmized, if not eliminated all together. With the many and varied ways of unwrapping optionals, it is
-safer and simpler to declare variables as optional and unwrap them when needing their values than it is 
+safer and simpler to declare variables as optional and unwrap them when needing their values than it is
 to force-unwrap them and potentially introduce runtime errors into the code base.
 
 ```swift
@@ -48,7 +51,7 @@ if let text = self.textLabel?.text {
 
 ```
 
-If you are interoping from Objective-C and the declaration automatically translates into force-unwrapped 
+If you are interoping from Objective-C and the declaration automatically translates into force-unwrapped
 parameters, replace them with `?` parameters instead.
 
 
@@ -59,14 +62,14 @@ the modifier is needed:
 
 ```swift
 internal final class Object {
-    
+
     var myInt: Int
 
-    private func doWork() 
+    private func doWork()
     {
         ...
     }
-    
+
 }
 
 ```
@@ -84,4 +87,3 @@ var intValue: Int
 var intValue : Int
 
 ```
-
