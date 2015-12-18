@@ -10,6 +10,38 @@ If there is anything you are looking for that is not covered here you should ref
 
 ----
 
+### File structure ###
+
+You should not have multiple classes in the same file, each class should have its own file. 
+
+The following list should be the standard struct/class organization of all your Swift files, in this specific order:
+
+* Static variables
+* View Lifecycle (if available)
+* Public
+* Private
+* Extensions
+
+When implementing a protocol you should create an extension of your class that lives in the same file.
+
+
+#### Usage of MARK ####
+
+To help organizing your files you may want to use pragma marks to clearly separate your functions, properties, extensions.
+
+```
+// MARK: Internal Functions
+
+func doSomething() {
+}
+
+// MARK: Private Functions
+
+private func doSomethingElse() {
+}
+```
+
+
 ### Variable Declaration ###
 
 For declaring variables, favor `let` instead of `var` unless you need a mutable object or container.
@@ -111,8 +143,7 @@ internal final class Object {
 
     var myInt: Int
 
-    private func doWork()
-    {
+    private func doWork() {
         ...
     }
 
