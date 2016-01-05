@@ -10,6 +10,23 @@ If there is anything you are looking for that is not covered here you should ref
 
 ----
 
+### Statement Termination ###
+
+Unlike Objective-C, omit the use of `;` to terminate statements. Instead, simply use new lines to indicate the end of a statement. 
+
+```swift
+let myVar = 0
+doSomething(myVar)
+
+return
+```
+
+Avoid multiple statements on a single line.
+
+```swift
+guard let obj = myObj else { print("Something went wrong"); return; } // Wrong! Instead, place each item on its own line.
+```
+
 ### Variable Declaration ###
 
 For declaring variables, favor `let` instead of `var` unless you need a mutable object or container.
