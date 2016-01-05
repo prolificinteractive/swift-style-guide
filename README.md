@@ -189,3 +189,56 @@ func isError(error: Error?) -> Bool {
 	return (error != nil) // In this case, we need the result of the bool, and this is much cleaner than the other options.
 }
 ```
+
+### Enums ###
+
+For enum declarations, declare each enum case on a new line with its own `case` statement instead of a comma-separated list.
+
+```swift
+internal enum State {
+	case Open
+	case Closed
+	case Pending
+	case Faulted
+}
+```
+
+Prefer singular case for enum names instead of plural: `State` vs. `States`:
+
+```swift
+var currentState = State.Open
+var previousState = States.Closed // Reads less clearly than the previous option.
+```
+
+For enums with associated values, declare the associated value on the same line as its declaration:
+
+```swift
+internal enum HTTPMethod: String {
+	case Get = "GET"
+	case Post = "POST"
+}
+```
+
+For any other functions or properties associated with the enum, place them after the last case item in the enum list:
+
+```swift
+internal enum State {
+	case Open
+	case Closed
+	case Pending
+	case Faulted
+	
+	func nextState() -> State {
+		...
+	}
+}
+```
+
+In cases where the enum's type name can be omitted, do so:
+
+```swift
+let state = State.Open
+
+if state == .Closed { ... // Prefer .Closed instead of State.Closed
+
+```
