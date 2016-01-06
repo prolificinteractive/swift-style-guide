@@ -246,5 +246,4 @@ In cases where the enum's type name can be omitted, do so:
 let state = State.Open
 
 if state == .Closed { ... // Prefer .Closed instead of State.Closed
-
 ```
