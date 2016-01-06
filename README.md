@@ -22,14 +22,18 @@ The following list should be the standard struct/class organization of all your 
 * Private
 * Extensions
 
-When implementing a protocol you should create an extension of your class that lives in the same file.
-
+When implementing a protocol you should create an extension of your class that lives in the same file to separate the core logic of your class and your protocol implementation.
 
 #### Usage of MARK ####
 
 To help organizing your files you may want to use pragma marks to clearly separate your functions, properties, extensions.
 
-```
+```swift
+// MARK: Public Functions
+
+public func doSomething() {
+}
+
 // MARK: Internal Functions
 
 func doSomething() {
