@@ -12,17 +12,46 @@ If there is anything you are looking for that is not covered here you should ref
 
 ### File structure ###
 
-You should not have multiple classes in the same file, each class should have its own file. 
+You should not have multiple classes in the same file, each class should have its own file. If you want to create a private class you can either define a private class inside the same file, or create a nested class inside the file's class.
+
+```swift
+class myClass {
+	// You can create a nested class inside the class...
+	class myNeastedClass {
+	}
+}
+
+// ...or create a private class inside the file.
+private class myPrivateClass {
+}
+```
 
 The following list should be the standard struct/class organization of all your Swift files, in this specific order:
 
+Before the class declaration:
+
+* Enums (as private)
 * Static variables
-* View Lifecycle (if available)
-* Public
-* Private
+
+Inside the class:
+
+* Init/Deinit
+* Override functions (including view lifecycle functions for a view controller)
+* Public properties
+* Private properties
+* Public functions
+* Private functions
+
+After the class declaration:
+
 * Extensions
 
 When implementing a protocol you should create an extension of your class that lives in the same file to separate the core logic of your class and your protocol implementation.
+
+#### Enum ####
+
+* Shared enums should live in their own file inside a shared folder.
+* Private enums should live within the associated class at the top of the file and be declared as private.
 
 #### Usage of MARK ####
 
