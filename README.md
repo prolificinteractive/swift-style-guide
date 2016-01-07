@@ -32,15 +32,13 @@ guard let obj = myObj else { print("Something went wrong"); return; } // Wrong! 
 For declaring variables, favor `let` instead of `var` unless you need a mutable object or container.
 
 ```swift
-func formatDate(date: NSDate) -> String
-{
+func formatDate(date: NSDate) -> String {
     let dateFormatter = NSDateFormatter() // In this case, use `let` since the variable `dateFormatter` never changes once set
     dateFormatter.dateStyle = .ShortStyle
     return dateFormatter.stringFromDate(date)
 }
 
-func arrays()
-{
+func arrays() {
     let array = ["Hello", "Ciao", "Aloha"] // use let here since this is an immutable container
 
     var mutableArray = [String]() // Use var here since this container is mutable
@@ -57,26 +55,21 @@ with other variable declarations.
 
 ```swift
 
-class Object
-{
-	
+class Object {
 	private var name = ""
 	
-	func useName()
-	{
+	func useName() {
 		// Let self be implied when it can be understood.
 		otherObject.doSomethingWithName(name)
 		setName("Will Smith")
 	}
 	
-	func setName(name: String)
-	{
+	func setName(name: String) {
 		// Use self here to prevent conflicts with the `name` parameter being passed.
 		self.name = name
 	}
 	
-	func setNameAsync(newName: String)
-	{
+	func setNameAsync(newName: String) {
 		// Use implicit self outside closures...
 		otherObject.doSomethingWithName(name, then: { 
 			// .. but within, you must use self to ease the compiler.
@@ -90,6 +83,31 @@ class Object
 *Rationale*: The idea behind this is that implicit use of self makes the conditions where you _must_ use self
 (for instance, within closures) much more apparent and will make you think more on the reasons why you are using it.
 In closures, think about: should `self` be `weak` instead of `strong`?
+
+### Bracket Syntax ###
+
+For brackets, prefer the Xcode-default syntax of having the opening brace be on the same line as the statement opening it:
+
+```swift
+internal final class MyObject {
+}
+
+internal enum MyEnum {
+}
+
+func doSomething() {
+}
+
+if true == false {
+}
+
+let doSomething: () -> Void = { 
+}
+
+```
+
+*Rationale*: Simply put, this is the Xcode default and standard, and it's not worth fighting. This keeps things consistent
+across the board and makes our lives as developers considerably easier.
 
 ### Force Unwrap ###
 
@@ -125,14 +143,11 @@ the modifier is needed:
 
 ```swift
 internal final class Object {
-
     var myInt: Int
 
-    private func doWork()
-    {
+    private func doWork() {
         ...
     }
-
 }
 
 ```
