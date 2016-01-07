@@ -150,3 +150,27 @@ var intValue: Int
 var intValue : Int
 
 ```
+
+### Nil-Checking ###
+
+Favor `if-let` checking over direct nil checking in all cases except when the result of this check is required:
+
+```swift
+guard let item = myItem else {
+	return
+}
+
+doSomethingWith(item)
+```
+
+```swift
+if let _ = error { // Prefer this over `if error != nil`
+	fatalError()
+}
+```
+
+```swift
+func isError(error: Error?) -> Bool {
+	return (error != nil) // In this case, we need the result of the bool, and this is much cleaner than the other options.
+}
+```
