@@ -166,6 +166,12 @@ var intValue : Int
 
 ```
 
+In all use-cases, the colon should be associated with the left-most item with no spaces preceding and one space afterwards:
+
+```swift
+let myDictionary: [String: AnyObject] = ["String": 0]
+```
+
 ### Nil-Checking ###
 
 Favor `if-let` checking over direct nil checking in all cases except when the result of this check is required:
