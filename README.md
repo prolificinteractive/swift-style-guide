@@ -12,19 +12,7 @@ If there is anything you are looking for that is not covered here you should ref
 
 ### File structure ###
 
-You should not have multiple types in the same file, each type should have its own file. If you want to create a private type you can either define a private type inside the same file, or create a nested type inside the file.
-
-```swift
-class myClass {
-	// You can create a nested class inside the class...
-	class myNeastedClass {
-	}
-}
-
-// ...or create a private class inside the file.
-private class myPrivateClass {
-}
-```
+You should not have multiple types in the same file, each type should have its own file.
 
 The following list should be the standard struct/class organization of all your Swift files, in this specific order:
 
