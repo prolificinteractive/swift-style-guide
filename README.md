@@ -12,7 +12,7 @@ If there is anything you are looking for that is not covered here you should ref
 
 ### File structure ###
 
-You should not have multiple types in the same file, each type should have its own file.
+You should not fine multiple types (ie class, struct, enum...) in the same file, each type should have its own file.
 
 The following list should be the standard struct/class organization of all your Swift files, in this specific order:
 
@@ -45,7 +45,7 @@ All enums should live in their own code file, except in cases where the enum is 
 
 #### Usage of MARK ####
 
-To help organizing your files you may want to use pragma marks to clearly separate your functions, properties, extensions. Only use them for the groups defined above. Also use a MARK per extensions.
+To help organizing your files you may want to use pragma marks to clearly separate your functions, properties, extensions. Only use them for the groups defined above. Also use a MARK per extension.
 
 ```swift
 // MARK: Public Functions
