@@ -216,7 +216,7 @@ var currentState = State.Open
 var previousState = States.Closed // Reads less clearly than the previous option.
 ```
 
-For enums with associated values, declare the associated value on the same line as its declaration:
+For enums with raw values, declare the raw value on the same line as its declaration:
 
 ```swift
 internal enum HTTPMethod: String {
