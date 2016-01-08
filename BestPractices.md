@@ -1,5 +1,9 @@
 # BEST PRACTICES #
 
+This is Prolific's Swift best practicies document. 
+
+The purpose of these best practices is to help you keep clean and bug free Swift code that is recommended to follow in your daily work.
+
 ### Property Observers ###
 Cf Apple documentation:
 

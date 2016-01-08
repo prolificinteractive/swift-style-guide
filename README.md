@@ -8,6 +8,8 @@ consistent and easy to read.
 This is a work in progress.
 If there is anything you are looking for that is not covered here you should refer to [Github's style guide](https://github.com/github/swift-style-guide).
 
+[Link](BestPractices.md) for Prolific's Swift Best Practices document.
+
 ----
 
 ### Statement Termination ###
