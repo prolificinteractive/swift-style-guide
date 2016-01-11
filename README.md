@@ -106,6 +106,48 @@ let doSomething: () -> Void = {
 
 ```
 
+For type declarations, include a single space between the type declaration and the first item implemented within
+it:
+
+```swift
+internal final class MyObject {
+
+	let value = 0
+```
+
+In addition, include a space before the type declarations closing bracket:
+
+```swift
+internal final class MyObject {
+	
+	let value = 0
+	
+	func doSomething() {
+		value += 1
+	}
+	
+}
+```
+
+This also applies to extension declarations:
+
+```swift
+extension MyObject {
+
+	func doAnotherThing() {
+		...
+	}
+}
+```
+
+Do not include this extra space in function declarations:
+
+```swift
+func doSomething() {
+	let value = 0
+}
+```
+
 *Rationale*: Simply put, this is the Xcode default and standard, and it's not worth fighting. This keeps things consistent
 across the board and makes our lives as developers considerably easier.
 
