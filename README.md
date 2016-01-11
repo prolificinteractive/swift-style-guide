@@ -82,7 +82,7 @@ class Object {
 
 *Rationale*: The idea behind this is that implicit use of self makes the conditions where you _must_ use self
 (for instance, within closures) much more apparent and will make you think more on the reasons why you are using it.
-In closures, think about: should `self` be `weak` instead of `strong`?
+In closures, think about: should `self` be `weak` instead of `strong`? Apple has even rejected a request to enforce use of `self` for this reason, [among others](http://ericasadun.com/2016/01/06/the-swift-evolution-proposal-se-0009-rejection/).
 
 ### Bracket Syntax ###
 
