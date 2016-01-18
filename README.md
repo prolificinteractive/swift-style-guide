@@ -12,30 +12,32 @@ If there is anything you are looking for that is not covered here you should ref
 
 ### File structure ###
 
-You should not fine multiple types (ie class, struct, enum...) in the same file, each type should have its own file.
+You should not define multiple types (ie class, struct, enum...) in the same file; each type should have its own file.
 
-The following list should be the standard struct/class organization of all your Swift files, in this specific order:
+The following list should be the standard organization of all your Swift files, in this specific order:
 
-Before the class declaration:
+Before the type declaration:
 
 * Enums (as private)
 
 Inside the class:
 
-* Public properties
-* Private properties
-* Public static variables
-* Private static variables
+* Properties
+* Static/Class Variables
+* Static/Class Functions
 * Init/Deinit
-* Override functions
-	* View lifecycle if in a view controller
-	* Other override functions 
-* Public functions
-* Private functions
+* Override
+* Instance Methods
 
 After the class declaration:
 
 * Extensions
+
+Each section above should be organized by accessibility:
+
+* Public
+* Internal
+* Private
 
 When implementing a protocol you should create an extension of your class that lives in the same file to separate the core logic of your class and your protocol implementation.
 
@@ -45,7 +47,7 @@ All enums should live in their own code file, except in cases where the enum is 
 
 #### Usage of MARK ####
 
-To help organizing your files you may want to use pragma marks to clearly separate your functions, properties, extensions. Only use them for the groups defined above. Also use a MARK per extension.
+To help organizing your files you may want to use pragma marks to clearly separate your functions, properties, extensions. Only use them for the groups defined above. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`
 
 ```swift
 // MARK: Public Functions
@@ -55,7 +57,7 @@ public func doSomething() {
 
 // MARK: Internal Functions
 
-func doSomething() {
+internal func doSomething() {
 }
 
 // MARK: Private Functions
