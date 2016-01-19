@@ -22,7 +22,7 @@ Before the type declaration:
 
 * Private Class/Struct/Enum
 
-Inside the class:
+Inside the type:
 
 * Properties
 * Static/Class Variables
@@ -31,7 +31,7 @@ Inside the class:
 * Override
 * Instance Methods
 
-After the class declaration:
+After the type declaration:
 
 * Extensions
 
