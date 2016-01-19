@@ -8,6 +8,8 @@ consistent and easy to read.
 This is a work in progress.
 If there is anything you are looking for that is not covered here you should refer to [Github's style guide](https://github.com/github/swift-style-guide).
 
+[Link](BestPractices.md) for Prolific's Swift Best Practices document.
+
 ----
 
 ### File structure ###
@@ -138,7 +140,7 @@ class Object {
 
 *Rationale*: The idea behind this is that implicit use of self makes the conditions where you _must_ use self
 (for instance, within closures) much more apparent and will make you think more on the reasons why you are using it.
-In closures, think about: should `self` be `weak` instead of `strong`?
+In closures, think about: should `self` be `weak` instead of `strong`? Apple has even rejected a request to enforce use of `self` for this reason, [among others](http://ericasadun.com/2016/01/06/the-swift-evolution-proposal-se-0009-rejection/).
 
 ### Bracket Syntax ###
 
@@ -160,6 +162,48 @@ if true == false {
 let doSomething: () -> Void = { 
 }
 
+```
+
+For type declarations, include a single space between the type declaration and the first item implemented within
+it:
+
+```swift
+internal final class MyObject {
+
+	let value = 0
+```
+
+In addition, include a space before the type declarations closing bracket:
+
+```swift
+internal final class MyObject {
+	
+	let value = 0
+	
+	func doSomething() {
+		value += 1
+	}
+	
+}
+```
+
+This also applies to extension declarations:
+
+```swift
+extension MyObject {
+
+	func doAnotherThing() {
+		...
+	}
+}
+```
+
+Do not include this extra space in function declarations:
+
+```swift
+func doSomething() {
+	let value = 0
+}
 ```
 
 *Rationale*: Simply put, this is the Xcode default and standard, and it's not worth fighting. This keeps things consistent
@@ -272,7 +316,7 @@ var currentState = State.Open
 var previousState = States.Closed // Reads less clearly than the previous option.
 ```
 
-For enums with associated values, declare the associated value on the same line as its declaration:
+For enums with raw values, declare the raw value on the same line as its declaration:
 
 ```swift
 internal enum HTTPMethod: String {
@@ -302,5 +346,4 @@ In cases where the enum's type name can be omitted, do so:
 let state = State.Open
 
 if state == .Closed { ... // Prefer .Closed instead of State.Closed
-
 ```
