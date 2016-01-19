@@ -14,13 +14,13 @@ If there is anything you are looking for that is not covered here you should ref
 
 ### File structure ###
 
-You should not define multiple types (ie class, struct, enum...) in the same file; each type should have its own file.
+You should not define multiple public/internal types (ie class, struct, enum) in the same file; each type should have its own file.
 
 The following list should be the standard organization of all your Swift files, in this specific order:
 
 Before the type declaration:
 
-* Enums (as private)
+* Private Class/Struct/Enum
 
 Inside the class:
 
