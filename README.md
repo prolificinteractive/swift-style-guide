@@ -8,6 +8,8 @@ consistent and easy to read.
 This is a work in progress.
 If there is anything you are looking for that is not covered here you should refer to [Github's style guide](https://github.com/github/swift-style-guide).
 
+[Link](BestPractices.md) for Prolific's Swift Best Practices document.
+
 ----
 
 ### Statement Termination ###
@@ -288,5 +290,4 @@ In cases where the enum's type name can be omitted, do so:
 let state = State.Open
 
 if state == .Closed { ... // Prefer .Closed instead of State.Closed
-
 ```
