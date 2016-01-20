@@ -22,7 +22,7 @@ Before the type declaration:
 
 * Private Class/Struct/Enum
 
-Inside the type:
+Inside the type declaration:
 
 * Properties
 * Static/Class Variables
