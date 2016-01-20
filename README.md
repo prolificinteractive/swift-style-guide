@@ -12,6 +12,72 @@ If there is anything you are looking for that is not covered here you should ref
 
 ----
 
+### File structure ###
+
+You should not define multiple public/internal types (ie class, struct, enum) in the same file; each type should have its own file.
+
+The following list should be the standard organization of all your Swift files, in this specific order:
+
+Before the type declaration:
+
+* Private Class/Struct/Enum
+
+Inside the type declaration:
+
+* Override Properties
+* Properties
+* Static/Class Variables
+* Static/Class Functions
+* Init/Deinit
+* Override Functions
+* Instance Functions
+
+After the type declaration:
+
+* Extensions
+
+Each section above should be organized by accessibility:
+
+* Public
+* Internal
+* Private
+
+When implementing a protocol you should create an extension of your class that lives in the same file to separate the core logic of your class and your protocol implementation.
+
+#### Enum ####
+
+All enums should live in their own code file, except in cases where the enum is declared as private. In cases where the enum is declared private, declare the enum at the top of the code file, above the type declaration.
+
+#### Usage of MARK ####
+
+To help organizing your files you may want to use pragma marks to clearly separate your functions, properties and extensions. Only use them for the groups defined above. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`
+
+```swift
+// MARK: Functions
+
+override func viewDidLoad() {
+}
+
+public func doSomething() {
+}
+
+internal func doSomething() {
+}
+
+private func doSomethingElse() {
+}
+
+// MARK: UITableViewDelegate Extension
+
+extension UIViewController: UITableViewDelegate {
+}
+
+// MARK: UITableViewDataSource Extension
+
+extension UIViewController: UITableViewDataSource {
+}
+```
+
 ### Statement Termination ###
 
 Unlike Objective-C, omit the use of `;` to terminate statements. Instead, simply use new lines to indicate the end of a statement. 
@@ -139,6 +205,7 @@ extension MyObject {
 	func doAnotherThing() {
 		...
 	}
+	
 }
 ```
 
