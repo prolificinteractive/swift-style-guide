@@ -49,7 +49,7 @@ All enums should live in their own code file, except in cases where the enum is 
 
 #### Usage of MARK ####
 
-To help organizing your files you may want to use pragma marks to clearly separate your functions, properties, extensions. Only use them for the groups defined above. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`
+To help organizing your files you may want to use pragma marks to clearly separate your functions and extensions. Only use them for the groups defined above. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`
 
 ```swift
 // MARK: Public Functions
@@ -195,6 +195,7 @@ extension MyObject {
 	func doAnotherThing() {
 		...
 	}
+	
 }
 ```
 
