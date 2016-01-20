@@ -24,12 +24,13 @@ Before the type declaration:
 
 Inside the type declaration:
 
+* Override Properties
 * Properties
 * Static/Class Variables
 * Static/Class Functions
 * Init/Deinit
-* Override
-* Instance Methods
+* Override Functions
+* Instance Functions
 
 After the type declaration:
 
@@ -49,22 +50,31 @@ All enums should live in their own code file, except in cases where the enum is 
 
 #### Usage of MARK ####
 
-To help organizing your files you may want to use pragma marks to clearly separate your functions and extensions. Only use them for the groups defined above. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`
+To help organizing your files you may want to use pragma marks to clearly separate your functions, properties and extensions. Only use them for the groups defined above. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`
 
 ```swift
-// MARK: Public Functions
+// MARK: Functions
+
+override func viewDidLoad() {
+}
 
 public func doSomething() {
 }
 
-// MARK: Internal Functions
-
 internal func doSomething() {
 }
 
-// MARK: Private Functions
-
 private func doSomethingElse() {
+}
+
+// MARK: UITableViewDelegate Extension
+
+extension UIViewController: UITableViewDelegate {
+}
+
+// MARK: UITableViewDataSource Extension
+
+extension UIViewController: UITableViewDataSource {
 }
 ```
 
