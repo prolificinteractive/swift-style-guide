@@ -50,12 +50,23 @@ guide your design principals.
 
 ### File structure ###
 
-You should not define multiple public/internal types (ie class, struct, enum) in the same file; each type should have its own file.
+You should not define multiple public/internal types (ie class, struct, enum) in the same file; each type should have its own file. If an enum or protocol is related to the class but has to be known outside define it inside the class file.
+
+E.g., The following enum can be used for both networking and data storage, so it should live as it's own entity:
+
+```swift
+enum Result<T> {
+    case Success(T)
+    case Failure(String)
+}
+```
 
 The following list should be the standard organization of all your Swift files, in this specific order:
 
 Before the type declaration:
 
+* Enum (if only related to the file's class)
+* Protocol (if only related to the file's class)
 * Private Class/Struct/Enum
 
 Inside the type declaration:
@@ -86,33 +97,7 @@ All enums should live in their own code file, except in cases where the enum is 
 
 #### Usage of MARK ####
 
-To help organizing your files you may want to use pragma marks to clearly separate your functions, properties and extensions. Only use them for the groups defined above. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`
-
-```swift
-// MARK: Functions
-
-override func viewDidLoad() {
-}
-
-public func doSomething() {
-}
-
-internal func doSomething() {
-}
-
-private func doSomethingElse() {
-}
-
-// MARK: UITableViewDelegate Extension
-
-extension UIViewController: UITableViewDelegate {
-}
-
-// MARK: UITableViewDataSource Extension
-
-extension UIViewController: UITableViewDataSource {
-}
-```
+To help organizing your files you may want to use pragma marks to clearly separate your functions, properties and extensions. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`.
 
 ### Statement Termination ###
 
