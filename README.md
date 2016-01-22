@@ -1,16 +1,49 @@
 # Prolific Swift Style Guide
 
-This is Prolific's style guide for writing code using Swift.
+## Table Of Contents ##
 
-The purpose of this guide is to develop a universal standard for Swift code that makes our codebases
-consistent and easy to read.
+* [Overview](#overview)
+* **Standards**
+	* [File Structure](#file-structure)
+	* [Statement Termintaion](#statement-termination)
+	* [Variable Declaration](#variable-declaration)
+	* [Self](#self)
+	* [Bracket Syntax](#bracket-syntax)
+	* [Force Unwrap](#force-unwrap)
+	* [Access Modifiers](#access-modifiers)
+	* [Type Declarations](#type-declarations)
+	* [Nil Checking](#nil-checking)
+	* [Enums](#enums)
+* [Best Practices](BestPractices.md)
 
-This is a work in progress.
-If there is anything you are looking for that is not covered here you should refer to [Github's style guide](https://github.com/github/swift-style-guide).
 
-[Link](BestPractices.md) for Prolific's Swift Best Practices document.
+## Overview ##
 
-----
+This is Prolific's style guide for writing code in Swift. The purpose of this guide is to develop 
+a universal standard for Swift code that makes our codebases consistent and easy to read. This guide aims for
+consistent and clean code written in Swift in line with Apple and the general community.
+
+The standards have been influenced by:
+
+* Apple's language design decisions -- specifically, its desire for Swift code to be written concisely and expressively
+* Xcode's defaults for code formatting
+* The general community
+
+#### Contributing
+
+If you wish to contribute, feel free to submit a pull request or file an issue on this repo. In the pull request, be sure to discuss what problem you are intending
+to solve and the rationale to do so. When submitting a pull request, consider:
+
+* Is my suggestion general enough to be considered a code standard for all code bases?
+* Does my suggestion fall in line with Apple's desire for the language?
+* Does your suggestion invalidate a language feature?
+
+Make sure to consider the resources in the open-source Swift repo; specifically, read through the various 
+[proposals](https://github.com/apple/swift-evolution/tree/master/proposals) for new language features as well as the 
+[most-commonly rejected proposals](https://github.com/apple/swift-evolution/blob/master/commonly_proposed.md) in order to 
+guide your design principals.
+
+## Standards ##
 
 ### File structure ###
 
@@ -283,7 +316,7 @@ In all use-cases, the colon should be associated with the left-most item with no
 let myDictionary: [String: AnyObject] = ["String": 0]
 ```
 
-### Nil-Checking ###
+### Nil Checking ###
 
 Favor `if-let` checking over direct nil checking in all cases except when the result of this check is required:
 
