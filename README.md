@@ -84,9 +84,19 @@ When implementing a protocol you should create an extension of your class that l
 
 All enums should live in their own code file, except in cases where the enum is declared as private. In cases where the enum is declared private, declare the enum at the top of the code file, above the type declaration.
 
-#### Usage of MARK ####
+*Rationale*: With enums and protocols types Swift allows defining functions and extensions. Because of that these types can become complex which is why they should be defined in their own file.
 
-To help organizing your files you may want to use pragma marks to clearly separate your functions, properties and extensions. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`.
+#### Usage of MARK / TODO / FIXME ####
+
+To help organizing your files you may want to use pragma marks to clearly separate your functions, properties and extensions. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate Functions` instead of `// MARK: Extensions`.
+
+Xcode is also able to display `TODO` and `FIXME` tags directly in the source navigator, you should consider using them to find your notes inside your files.
+
+`// TODO: implement this feature`
+
+`// FIXME: fix it it's not working`
+
+Other conventional comment tags, such as `NOTE` and `XXX` are not recognized by Xcode.
 
 ### Statement Termination ###
 
