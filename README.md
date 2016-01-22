@@ -244,7 +244,7 @@ across the board and makes our lives as developers considerably easier.
 ### Force Unwrap ###
 
 Unless there is a situation that absolutely calls for it, usage of the force-unwrap operator `(!)` should
-be minmized, if not eliminated all together. With the many and varied ways of unwrapping optionals, it is
+be minimized, if not eliminated all together. With the many and varied ways of unwrapping optionals, it is
 safer and simpler to declare variables as optional and unwrap them when needing their values than it is
 to force-unwrap them and potentially introduce runtime errors into the code base.
 
