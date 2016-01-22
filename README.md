@@ -13,6 +13,7 @@
 	* [Access Modifiers](#access-modifiers)
 	* [Type Declarations](#type-declarations)
 	* [Nil Checking](#nil-checking)
+	* [Implicit Getters](#implicit-getters)
 	* [Enums](#enums)
 * [Best Practices](BestPractices.md)
 
@@ -42,6 +43,7 @@ Make sure to consider the resources in the open-source Swift repo; specifically,
 [proposals](https://github.com/apple/swift-evolution/tree/master/proposals) for new language features as well as the 
 [most-commonly rejected proposals](https://github.com/apple/swift-evolution/blob/master/commonly_proposed.md) in order to 
 guide your design principals.
+
 
 ## Standards ##
 
@@ -339,6 +341,29 @@ func isError(error: Error?) -> Bool {
 	return (error != nil) // In this case, we need the result of the bool, and this is much cleaner than the other options.
 }
 ```
+
+### Implicit Getters ###
+
+When overriding only the getter of a property, omit the use of `get`:
+
+```swift
+var myInt: Int {
+	return 0
+}
+
+// Do not do this:
+var myInt: Int {
+	get {
+		return 0
+	}
+}
+
+```
+
+For all other cases, specify the modifier as needed (`set`, `didSet`, etc.). This is compiler enforced.
+
+*Rationale* The getter is implied enough to make sense without having to make it explicitly. It also cuts down on
+unneccessary verbiage and spacing to make code clearer.
 
 ### Enums ###
 
