@@ -50,23 +50,12 @@ guide your design principals.
 
 ### File structure ###
 
-You should not define multiple public/internal types (ie class, struct, enum) in the same file; each type should have its own file. If an enum or protocol is related to the class but has to be known outside define it inside the class file.
-
-E.g., The following enum can be used for both networking and data storage, so it should live as it's own entity:
-
-```swift
-enum Result<T> {
-    case Success(T)
-    case Failure(String)
-}
-```
+You should not define multiple public/internal types (ie class, struct, enum) in the same file; each type should have its own file.
 
 The following list should be the standard organization of all your Swift files, in this specific order:
 
 Before the type declaration:
 
-* Enum (if only related to the file's class)
-* Protocol (if only related to the file's class)
 * Private Class/Struct/Enum
 
 Inside the type declaration:
