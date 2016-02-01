@@ -80,11 +80,11 @@ Each section above should be organized by accessibility:
 
 When implementing a protocol you should create an extension of your class that lives in the same file to separate the core logic of your class and your protocol implementation.
 
-#### Enum ####
+#### Enum & Protocol ####
 
-All enums should live in their own code file, except in cases where the enum is declared as private. In cases where the enum is declared private, declare the enum at the top of the code file, above the type declaration.
+All enums should live in their own file, except in cases where the enum is declared as private. In cases where the enum is declared private, declare the enum at the top of the file, above the type declaration.
 
-*Rationale*: With enums and protocols types Swift allows defining functions and extensions. Because of that these types can become complex which is why they should be defined in their own file.
+*Rationale*: With enum and protocol types Swift allows defining functions and extensions. Because of that these types can become complex which is why they should be defined in their own file.
 
 #### Usage of MARK / TODO / FIXME ####
 
@@ -96,7 +96,7 @@ Xcode is also able to display `TODO` and `FIXME` tags directly in the source nav
 
 `// FIXME: fix it it's not working`
 
-Other conventional comment tags, such as `NOTE` and `XXX` are not recognized by Xcode.
+Other conventional comment tags, such as `NOTE` are not recognized by Xcode.
 
 ### Statement Termination ###
 
