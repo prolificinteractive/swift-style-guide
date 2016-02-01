@@ -3,7 +3,7 @@
 ## Table Of Contents ##
 
 * [Overview](#overview)
-* **Standards**
+* [Standards](#standards)
 	* [File Structure](#file-structure)
 	* [Statement Termintaion](#statement-termination)
 	* [Variable Declaration](#variable-declaration)
@@ -80,39 +80,23 @@ Each section above should be organized by accessibility:
 
 When implementing a protocol you should create an extension of your class that lives in the same file to separate the core logic of your class and your protocol implementation.
 
-#### Enum ####
+#### Enum & Protocol ####
 
-All enums should live in their own code file, except in cases where the enum is declared as private. In cases where the enum is declared private, declare the enum at the top of the code file, above the type declaration.
+All enums should live in their own file, except in cases where the enum is declared as private. In cases where the enum is declared private, declare the enum at the top of the file, above the type declaration.
 
-#### Usage of MARK ####
+*Rationale*: With enum and protocol types Swift allows defining functions and extensions. Because of that these types can become complex which is why they should be defined in their own file.
 
-To help organizing your files you may want to use pragma marks to clearly separate your functions, properties and extensions. Only use them for the groups defined above. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate` instead of `// MARK: Extensions`
+#### Usage of MARK / TODO / FIXME ####
 
-```swift
-// MARK: Functions
+To help organizing your files you may want to use pragma marks to clearly separate your functions, properties and extensions. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate Functions` instead of `// MARK: Extensions`.
 
-override func viewDidLoad() {
-}
+Xcode is also able to display `TODO` and `FIXME` tags directly in the source navigator, you should consider using them to find your notes inside your files.
 
-public func doSomething() {
-}
+`// TODO: implement this feature`
 
-internal func doSomething() {
-}
+`// FIXME: fix it it's not working`
 
-private func doSomethingElse() {
-}
-
-// MARK: UITableViewDelegate Extension
-
-extension UIViewController: UITableViewDelegate {
-}
-
-// MARK: UITableViewDataSource Extension
-
-extension UIViewController: UITableViewDataSource {
-}
-```
+Other conventional comment tags, such as `NOTE` are not recognized by Xcode.
 
 ### Statement Termination ###
 
@@ -259,7 +243,7 @@ across the board and makes our lives as developers considerably easier.
 ### Force Unwrap ###
 
 Unless there is a situation that absolutely calls for it, usage of the force-unwrap operator `(!)` should
-be minmized, if not eliminated all together. With the many and varied ways of unwrapping optionals, it is
+be minimized, if not eliminated all together. With the many and varied ways of unwrapping optionals, it is
 safer and simpler to declare variables as optional and unwrap them when needing their values than it is
 to force-unwrap them and potentially introduce runtime errors into the code base.
 
