@@ -3,7 +3,7 @@
 ## Table Of Contents ##
 
 * [Overview](#overview)
-* **Standards**
+* [Standards](#standards)
 	* [File Structure](#file-structure)
 	* [Statement Termintaion](#statement-termination)
 	* [Variable Declaration](#variable-declaration)
