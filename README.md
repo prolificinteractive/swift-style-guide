@@ -12,6 +12,7 @@
 	* [Force Unwrap](#force-unwrap)
 	* [Access Modifiers](#access-modifiers)
 	* [Type Declarations](#type-declarations)
+	* [Type Inference](#type-inference)
 	* [Nil Checking](#nil-checking)
 	* [Enums](#enums)
 * [Best Practices](BestPractices.md)
@@ -42,6 +43,7 @@ Make sure to consider the resources in the open-source Swift repo; specifically,
 [proposals](https://github.com/apple/swift-evolution/tree/master/proposals) for new language features as well as the 
 [most-commonly rejected proposals](https://github.com/apple/swift-evolution/blob/master/commonly_proposed.md) in order to 
 guide your design principals.
+
 
 ## Standards ##
 
@@ -315,6 +317,31 @@ In all use-cases, the colon should be associated with the left-most item with no
 ```swift
 let myDictionary: [String: AnyObject] = ["String": 0]
 ```
+
+### Type Inference ###
+
+Prefer letting the compiler infer the type instead of explcitly stating it, wherever possible:
+
+```swift
+var max = 0 		// Int
+var name = "John" 	// String
+var rect = CGRect()	// CGRect
+
+// Do not do:
+
+var max: Int = 0
+var name: String = "John"
+var rect: CGRect = CGRect()
+
+// Ok since the inferred type is not what we wanted:
+
+var max: Hashable = 0 // Compiler would infer Int, but we only want it to be hashable
+var name: String? = "John" // Compiler would infer this not to be optional, but we may need to nil it out later.
+```
+
+*Rationale* The compiler is pretty smart, and we should utilize it where necessary. It is generally obvious what the 
+type is going to be in the instances above, so unless we need to be more explicit (as in the last examples above),
+it is better to omit unneeded words.
 
 ### Nil Checking ###
 
