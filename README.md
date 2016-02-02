@@ -5,6 +5,7 @@
 * [Overview](#overview)
 * [Standards](#standards)
 	* [File Structure](#file-structure)
+	* [Types](#types)
 	* [Statement Termintaion](#statement-termination)
 	* [Variable Declaration](#variable-declaration)
 	* [Self](#self)
@@ -97,6 +98,45 @@ Xcode is also able to display `TODO` and `FIXME` tags directly in the source nav
 `// FIXME: fix it it's not working`
 
 Other conventional comment tags, such as `NOTE` are not recognized by Xcode.
+
+### Types ###
+
+Always use Swift native types when available. Swift offers a bridging to Objective-C so you can use them whenever you want.
+
+**Preferred:**
+
+```
+class myClass {
+...
+}
+```
+
+**Not preferred:**
+
+```
+@objc class myClass {
+...
+}
+```
+
+For numbers NSNumber is even less useful than before since you can create a Swift raw number type from any other types.
+
+**Preferred:**
+
+```
+let scale = 5.0
+let scaleString = (5.0 as NSNumber).stringValue
+let scaleInt = Int(scale)
+```
+
+**Not preferred:**
+
+```
+let scale: NSNumber = 5.0
+let scaleString = scale.stringValue
+let scaleInt = scale.integerValue
+```
+
 
 ### Statement Termination ###
 
