@@ -101,7 +101,10 @@ Other conventional comment tags, such as `NOTE` are not recognized by Xcode.
 
 ### Types ###
 
-Always use Swift native types when available. Swift offers a bridging to Objective-C so you can use them whenever you want.
+Prefer Swift native types over Objective-C types when possible. Because Swift types bridge to Objective-C, you should avoid types like NSString and NSNumber in favor of Int or String.
+
+
+Avoid subclassing NSObject or using the @objc flag unless it is required to implement an NSObjectProtocol type. Subclassing NSObject or using the @objc flag automatically creates an Objective-C object that uses dynamic dispatch over the preferred static of Swift which can impact the performance of the app.
 
 **Preferred:**
 
@@ -119,7 +122,7 @@ class myClass {
 }
 ```
 
-For numbers NSNumber is even less useful than before since you can create a Swift raw number type from any other types.
+If you need functionality from an Objective-C type that is not available in its corresponding Swift type (for instance, needing an NSString function that is not available on String), cast your Swift raw type to the corresponding Objective-C type instead of declaring the type as the Objective-C type.
 
 **Preferred:**
 
