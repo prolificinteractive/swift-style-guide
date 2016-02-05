@@ -5,6 +5,7 @@
 * [Overview](#overview)
 * [Standards](#standards)
 	* [File Structure](#file-structure)
+	* [Types](#types)
 	* [Statement Termintaion](#statement-termination)
 	* [Variable Declaration](#variable-declaration)
 	* [Self](#self)
@@ -99,6 +100,48 @@ Xcode is also able to display `TODO` and `FIXME` tags directly in the source nav
 `// FIXME: fix it it's not working`
 
 Other conventional comment tags, such as `NOTE` are not recognized by Xcode.
+
+### Types ###
+
+Prefer Swift native types over Objective-C types when possible. Because Swift types bridge to Objective-C, you should avoid types like NSString and NSNumber in favor of Int or String.
+
+
+Avoid subclassing NSObject or using the @objc flag unless it is required to implement an NSObjectProtocol type. Subclassing NSObject or using the @objc flag automatically creates an Objective-C object that uses dynamic dispatch over the preferred static of Swift which can impact the performance of the app.
+
+**Preferred:**
+
+```
+class myClass {
+...
+}
+```
+
+**Not preferred:**
+
+```
+@objc class myClass {
+...
+}
+```
+
+If you need functionality from an Objective-C type that is not available in its corresponding Swift type (for instance, needing an NSString function that is not available on String), cast your Swift raw type to the corresponding Objective-C type instead of declaring the type as the Objective-C type.
+
+**Preferred:**
+
+```
+let scale = 5.0
+let scaleString = (5.0 as NSNumber).stringValue
+let scaleInt = Int(scale)
+```
+
+**Not preferred:**
+
+```
+let scale: NSNumber = 5.0
+let scaleString = scale.stringValue
+let scaleInt = scale.integerValue
+```
+
 
 ### Statement Termination ###
 
