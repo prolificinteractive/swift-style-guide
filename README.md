@@ -8,6 +8,7 @@
 	* [Statement Termintaion](#statement-termination)
 	* [Variable Declaration](#variable-declaration)
 	* [Self](#self)
+	* [Structs & Classes](#structs--classes)
 	* [Bracket Syntax](#bracket-syntax)
 	* [Force Unwrap](#force-unwrap)
 	* [Access Modifiers](#access-modifiers)
@@ -171,6 +172,28 @@ class Object {
 *Rationale*: The idea behind this is that implicit use of self makes the conditions where you _must_ use self
 (for instance, within closures) much more apparent and will make you think more on the reasons why you are using it.
 In closures, think about: should `self` be `weak` instead of `strong`? Apple has even rejected a request to enforce use of `self` for this reason, [among others](http://ericasadun.com/2016/01/06/the-swift-evolution-proposal-se-0009-rejection/).
+
+### Structs & Classes ###
+
+In Swift, structs maintain value semantics which means their values are copied when assigned. Classes, on the other hand, act like pointers from C
+and Objective-C; they are called reference types and the internal data is shared amongst instances of assigning.
+
+When composing your types, consider carefully what they're going to be used for before choosing what they should end up being. In general, 
+consider structs for types that are:
+
+* Immutable
+* Stateless
+* Have a definition for equality
+
+Swift structs also have other, tangible benefits as well:
+
+* Faster 
+* Safer due to copying rather than referencing
+* Thread safe -- copies allow mutations to happen independently of other instances.
+
+In general, you should favor structs and protocols over classes; even in cases where polymorphism would dictate the usage of a class, consider if you can
+achieve a similar result via protocols and extensions. This allows you to achieve polymorphism via *composition* rather than *inheritance*.
+
 
 ### Bracket Syntax ###
 
