@@ -17,6 +17,7 @@
 	* [Nil Checking](#nil-checking)
 	* [Implicit Getters](#implicit-getters)
 	* [Enums](#enums)
+	* [Use of `Final`](#use-of-final)
 * [Best Practices](BestPractices.md)
 
 
@@ -449,3 +450,41 @@ let state = State.Open
 
 if state == .Closed { ... // Prefer .Closed instead of State.Closed
 ```
+
+
+### Use of `final` ###
+
+Classes should always be marked as `final` unless they are being used as a base class for another type. In instances where a class can be subclassed,
+any function or variable that should not be overriden by a subclass should be diligently marked as `final`.
+
+```swift
+// Not built for inheritance.
+internal final class Object { 
+
+}
+
+// Purposefully utilizable as a base class
+internal class BaseClass { 
+	
+	func doSomething () {
+	}
+	
+	// Properly marked as final so subclasses cannot override
+	final func update() { 
+	}
+	
+}
+
+internal final class SubClass: BaseClass {
+	
+	override func doSomething() {
+		update()
+	}
+	
+}
+
+```
+
+
+*Rationale* Subclassing in instances where the original class was not built to support subclasses can be a common source of bugs. Marking classes as `final`
+indicates that it was developed under the assumption that it would act on its own without regard for subclasses. 
