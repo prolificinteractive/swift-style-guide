@@ -18,7 +18,7 @@
 	* [Nil Checking](#nil-checking)
 	* [Implicit Getters](#implicit-getters)
 	* [Enums](#enums)
-	* [Use of `Final`](#use-of-final)
+	* [Use of `final`](#use-of-final)
 * [Best Practices](BestPractices.md)
 
 
