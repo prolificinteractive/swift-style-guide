@@ -1,6 +1,6 @@
 # BEST PRACTICES #
 
-This is Prolific's Swift best practicies document. 
+This is Prolific's Swift best practices document. 
 
 The purpose of these best practices is to help you keep clean and bug free Swift code that is recommended to follow in your daily work.
 
