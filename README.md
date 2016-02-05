@@ -105,12 +105,11 @@ Other conventional comment tags, such as `NOTE` are not recognized by Xcode.
 
 Prefer Swift native types over Objective-C types when possible. Because Swift types bridge to Objective-C, you should avoid types like NSString and NSNumber in favor of Int or String.
 
-
-Avoid subclassing NSObject or using the @objc flag unless it is required to implement an NSObjectProtocol type. Subclassing NSObject or using the @objc flag automatically creates an Objective-C object that uses dynamic dispatch over the preferred static of Swift which can impact the performance of the app.
+*Rationale*: Avoid subclassing NSObject or using the @objc flag unless it is required to implement an NSObjectProtocol type. Subclassing NSObject or using the @objc flag automatically creates an Objective-C object that uses dynamic dispatch over the preferred static of Swift which can impact the performance of the app.
 
 **Preferred:**
 
-```
+```swift
 class myClass {
 ...
 }
@@ -118,7 +117,7 @@ class myClass {
 
 **Not preferred:**
 
-```
+```swift
 @objc class myClass {
 ...
 }
@@ -128,7 +127,7 @@ If you need functionality from an Objective-C type that is not available in its 
 
 **Preferred:**
 
-```
+```swift
 let scale = 5.0
 let scaleString = (5.0 as NSNumber).stringValue
 let scaleInt = Int(scale)
@@ -136,7 +135,7 @@ let scaleInt = Int(scale)
 
 **Not preferred:**
 
-```
+```swift
 let scale: NSNumber = 5.0
 let scaleString = scale.stringValue
 let scaleInt = scale.integerValue
