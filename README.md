@@ -6,7 +6,7 @@
 * [Standards](#standards)
 	* [File Structure](#file-structure)
 	* [Types](#types)
-	* [Statement Termintaion](#statement-termination)
+	* [Statement Termination](#statement-termination)
 	* [Variable Declaration](#variable-declaration)
 	* [Self](#self)
 	* [Structs & Classes](#structs--classes)
@@ -91,7 +91,7 @@ All enums should live in their own file, except in cases where the enum is decla
 
 #### Usage of MARK / TODO / FIXME ####
 
-To help organizing your files you may want to use pragma marks to clearly separate your functions, properties and extensions. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate Functions` instead of `// MARK: Extensions`.
+To help organize your files you may want to use pragma marks to clearly separate your functions, properties and extensions. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate Functions` instead of `// MARK: Extensions`.
 
 Xcode is also able to display `TODO` and `FIXME` tags directly in the source navigator, you should consider using them to find your notes inside your files.
 
@@ -182,7 +182,7 @@ func arrays() {
 
 ### Self ###
 
-Never use the `self` modifier except in cases where it is necessary by the compiler or to alleviate conflicts
+Never use the `self` modifier except in cases where it is necessary for the compiler or to alleviate conflicts
 with other variable declarations.
 
 ```swift
