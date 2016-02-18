@@ -418,7 +418,7 @@ func isError(error: Error?) -> Bool {
 }
 ```
 
-### Implicit Getters ###
+### Implicit Getters ###  
 
 When overriding only the getter of a property, omit the use of `get`:
 
