@@ -443,14 +443,14 @@ unneccessary verbiage and spacing to make code clearer.
 
 ### Enums ###
 
-For enum declarations, declare each enum case on a new line with its own `case` statement instead of a comma-separated list.
+For enum declarations, declare each enum case on a new line and in alphabetical order with its own `case` statement instead of a comma-separated list. 
 
 ```swift
 internal enum State {
-	case Open
 	case Closed
-	case Pending
 	case Faulted
+	case Open
+	case Pending
 }
 ```
 
