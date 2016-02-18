@@ -12,6 +12,7 @@
 	* [Structs & Classes](#structs--classes)
 	* [Bracket Syntax](#bracket-syntax)
 	* [Force Unwrap](#force-unwrap)
+	* [Error Handling](#error-handling)
 	* [Access Modifiers](#access-modifiers)
 	* [Type Declarations](#type-declarations)
 	* [Type Inference](#type-inference)
@@ -332,6 +333,93 @@ to exist for the lifetime of the view controller object:
 
 ```
 
+### Error Handling ###
+
+The emergence of `try / catch` in Swift 2 has added powerful ways to define and return errors when something fails. The emergence of `ErrorType`
+as well for defining errors makes error definitions much more convenient over the cumbersome `NSError`. Because of this, for functions that can have multiple
+points of failure, you should always define it as `throws` and return a well-defined `ErrorType`.
+
+Consider the following contrived example:
+
+```swift
+
+func multiplyEvensLessThan10(evenNumber: Int) -> Int? {
+	guard evenNumber % 2 == 0 && evenNumber < 10 else {
+		return nil
+	}
+	
+	return evenNumber * 2
+}
+
+```
+
+The function above fails because it only expects evens less than 10 and returns an optional if that is violated. While this works and is simple, it
+is more Objective-C than Swift in its composition. The caller may not know which parameter they violated. For Swift, instead consider refactoring it as follows:
+
+```swift
+
+internal enum NumberError: ErrorType {
+	case NotEven
+	case TooLarge
+}
+
+func multiplyEvens(evenNumber: Int) throws -> Int {
+	guard evenNumber % 2 == 0 else {
+		throw NumberError.NotEven
+	}
+	
+	guard evenNumber < 10 else {
+		throw NumberError.TooLarge
+	}
+	
+	return evenNumber * 2
+}
+
+```
+
+The above, while slightly more cumbersome, this has well-defined benefits:
+
+* The caller is able to explicitly determine why their call to the function failed and thus can take active steps to recover:
+
+```swift
+let result: Int
+do {
+    result = try multiplyEvens(3)
+} catch NumberError.NotEven {
+    return 0
+} catch NumberError.TooLarge {
+    print("The Number entered was too large! Try again.")
+    return -1
+} catch {
+    fatalError("Unhandled error occurred.")
+}
+
+return result
+```
+
+* Try/catch semantics allow the caller to still retain the old optional functionality if the error is not relevant and they only care about the outcome:
+
+```swift
+let result: Int? = try? multiplyEvens(1)
+```
+
+* Or, if the caller knows that it will not violate any of the parameters for a valid input:
+
+```swift
+let result: Int = try! multiplyEvens(2)
+```
+
+So, even though we've now modified our API to use swift exceptions, we can still retain the old Objective-C functionality giving the caller the choice
+of how they wish to handle the result of this failable operation.
+
+#### NSError ####
+
+In general, you should avoid `NSError` in Swift in favor of defining your own `ErrorType`. However, in the event you do need to use `NSError` 
+(for interop with Objective-C, for instance):
+
+* Define a proper domain for your `NSError`. This should be specific to your module and ideally would be reflective of your bundle identifier (i.e. `com.prolificinteractive.MyApp`)
+* Define a list of the various error codes and what they translate to. These should be some sort of easily readable constant or enum value so that way the caller is able to determine what exactly failed.
+* In the userInfo, include _at least_ a localized description (`NSLocalizedDescriptionKey`) that accurately and concisely describes the nature of the error.
 
 ### Access Modifiers ###
 
