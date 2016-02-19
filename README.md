@@ -110,7 +110,7 @@ Prefer Swift native types over Objective-C types when possible. Because Swift ty
 **Preferred:**
 
 ```swift
-class myClass {
+class MyClass {
 ...
 }
 ```
@@ -118,7 +118,7 @@ class myClass {
 **Not preferred:**
 
 ```swift
-@objc class myClass {
+@objc class MyClass {
 ...
 }
 ```
