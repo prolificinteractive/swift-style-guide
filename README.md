@@ -349,6 +349,19 @@ internal final class Object {
 
 ```
 
+Further, the access modifier should always be presented first in the list before any other modifiers:
+
+```swift
+// Good!
+private unowned var obj: Object
+
+internal func doSomething() {
+}
+
+// Wrong!
+weak public var obj: Object?
+```
+
 ### Type Declarations ###
 
 When declaring types, the colon should be placed immediately after the identifier followed by one space
