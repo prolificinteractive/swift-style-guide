@@ -3,6 +3,7 @@
 ## Table Of Contents ##
 
 * [Overview](#overview)
+* [Linter](#linter)
 * [Standards](#standards)
 	* [File Structure](#file-structure)
 	* [Types](#types)
@@ -47,6 +48,12 @@ Make sure to consider the resources in the open-source Swift repo; specifically,
 [proposals](https://github.com/apple/swift-evolution/tree/master/proposals) for new language features as well as the 
 [most-commonly rejected proposals](https://github.com/apple/swift-evolution/blob/master/commonly_proposed.md) in order to 
 guide your design principals.
+
+## Linter ##
+
+In order to automate many of the rules here, we recommend using [our fork of Swiftlint](https://github.com/prolificinteractive/SwiftLint) in your Swift codebase.
+While the main fork of Swiftlint is based around the GitHub style guide for Swift, our fork has additional rules and corrections for rules specific to our 
+style guide that you will not find in the GitHub one. 
 
 
 ## Standards ##
