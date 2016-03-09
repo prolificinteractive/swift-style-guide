@@ -519,6 +519,30 @@ func isError(error: Error?) -> Bool {
 }
 ```
 
+If there's a case where you want to enter a scope if AT LEAST ONE item is non-nil then use the `??` operator.
+
+```swift
+if let _ = item ?? item1 {
+	// At least one of these is not nil
+}
+```
+
+If you want to enter a scope, only if an object is nil, then you can check directly for nil.
+
+```swift
+if item == nil {
+	// Do stuff..
+}
+```
+
+Additionally, check directly for nil if you are checking for nil AND checking if a bool is YES or NO.
+
+```swift
+if item != nil && propertyBool == true {
+	// Do stuff..
+}
+```
+
 ### Implicit Getters ###
 
 When overriding only the getter of a property, omit the use of `get`:
