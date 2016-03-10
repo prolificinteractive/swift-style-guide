@@ -527,18 +527,18 @@ if let _ = item ?? item1 {
 }
 ```
 
+If you want to check for non-nil AND evaluate a bool property or series of bool properties, use the `where` keyword.
+
+```swift
+if let _ = item where propertyBoolOne && !propertyBoolTwo {
+	// Bool properties have been evaluated.
+}
+```
+
 If you want to enter a scope, only if an object is nil, then you can check directly for nil.
 
 ```swift
 if item == nil {
-	// Do stuff..
-}
-```
-
-Additionally, check directly for nil if you are checking for nil AND checking if a bool is YES or NO.
-
-```swift
-if item != nil && propertyBool == true {
 	// Do stuff..
 }
 ```
