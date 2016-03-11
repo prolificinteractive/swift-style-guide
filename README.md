@@ -14,6 +14,7 @@
 	* [Force Unwrap](#force-unwrap)
 	* [Error Handling](#error-handling)
 	* [Access Modifiers](#access-modifiers)
+	* [Imports](#imports)
 	* [Type Declarations](#type-declarations)
 	* [Type Inference](#type-inference)
 	* [Nil Checking](#nil-checking)
@@ -448,6 +449,25 @@ internal func doSomething() {
 
 // Wrong!
 weak public var obj: Object?
+
+### Imports ###
+
+Import statements should be at the very top of the code file, and they should be listed in alphabetical order.
+
+```swift
+import AFNetworking
+import Foundation
+import ReactiveCocoa
+import RealmSwift
+import UIKit
+```
+
+The exception is for imports that are for testing only; they should be placed at the bottom of the list, in alphabetical order:
+
+```swift
+import AFNetworking
+import UIKit
+@testable import MyLibrary
 ```
 
 ### Type Declarations ###
