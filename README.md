@@ -519,6 +519,8 @@ func isError(error: Error?) -> Bool {
 }
 ```
 
+For style suggestions regarding nil checking visit our [best practices](https://github.com/prolificinteractive/swift-style-guide/blob/master/BestPractices.md) section.
+
 ### Implicit Getters ###
 
 When overriding only the getter of a property, omit the use of `get`:
