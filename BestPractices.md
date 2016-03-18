@@ -4,6 +4,34 @@ This is Prolific's Swift best practices document.
 
 The purpose of these best practices is to help you keep clean and bug free Swift code that is recommended to follow in your daily work.
 
+### Nil Checking ###
+
+Though we have conventions for nil checking in the swift style guide, below are some suggestions for nil checking in certain situations.
+
+If there's a case where you want to enter a scope if AT LEAST ONE item is non-nil then use the `??` operator.
+
+```swift
+if let _ = item ?? item1 {
+	// At least one of these is not nil
+}
+```
+
+If you want to check for non-nil AND evaluate a bool property or series of bool properties, use the `where` keyword.
+
+```swift
+if let _ = item where propertyBoolOne && !propertyBoolTwo {
+	// Bool properties have been evaluated.
+}
+```
+
+If you want to enter a scope, only if an object is nil, then you can check directly for nil.
+
+```swift
+if item == nil {
+	// Do stuff..
+}
+```
+
 ### Property Observers ###
 Cf Apple documentation:
 
