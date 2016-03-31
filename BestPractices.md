@@ -32,6 +32,63 @@ if item == nil {
 }
 ```
 
+### Assertion management ###
+
+When working with optional values you have to make sure that the variable you work with doesn’t have a `nil` value. To do so you can use the different unwrapping techniques provided by the standard library, but in certain scenarios it can make sense to force unwrap your value and terminate your program (for example a wrong view controller type after instantiating from a Storyboard). In this case your app better terminate in order to avoid unexpected behaviors.
+
+The standard Swift library provides you different assertion functions that affect your code differently:
+
+* assert
+* assertionFailure
+* precondition
+* preconditionFailure
+* fataError
+
+#### assert ####
+`assert` is only evaluated in debug mode, it means that the line will be removed in release and will not be executed.
+
+#### assertionFailure ####
+`assertionFailure` acts like `assert` but provides some context to the compiler.
+
+#### precondition ####
+`precondition` ensures that the given condition is meet. If not the app will terminate. `precondition` works for both debug and release.
+
+#### preconditionFailure ####
+`preconditionFailure` means a fatal error and will terminate in both debug and release mode, except for unchecked builds (`-Ounchecked`), then it will never be executed.
+
+#### fatalError ####
+`fatalError` acts like `preconditionFailure` but is not affected by the unchecked build flag. It will always terminate your app in both debug and release mode.
+
+#### Production ####
+
+Although crashing on production is not always the ideal. Often you prefer crashing on debug but in production handle the error with a default value like 0 or empty array. To do so, we recommand implementing a function that takes an optional value as well as a tuple containing the default value of the same type and a error message for the context.
+
+```swift
+func nilOrDefault<T>(value: T?, @autoclosure defaultValue: () -> (value: T, text: String)) -> T {
+    assert(value != nil, defaultValue().text)
+    return value ?? defaultValue().value
+}
+
+let int2 = nilOrDefault(Int("s"), defaultValue: (value: 0, text: "Expected int not working"))
+// crash in Debug
+// 0 in Release
+```
+
+You can also define a custom operator doing the same thing if you want a more concise syntax:
+
+```swift
+infix operator ?! {}
+
+func ?!<T>(wrapped: T?, @autoclosure nilDefault: () -> (value: T, text: String)) -> T {
+    assert(wrapped != nil, nilDefault().text)
+    return wrapped ?? nilDefault().value
+}
+
+let integer = Int(string) ?! (0, “Expected integer, got \(string)”)
+// crash in Debug
+// 0 in Release
+```
+
 ### Property Observers ###
 Cf Apple documentation:
 
