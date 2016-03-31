@@ -61,7 +61,7 @@ The standard Swift library provides you different assertion functions that affec
 
 #### Production ####
 
-Although crashing on production is not always the ideal. Often you prefer crashin on debug but in production handle the error with a default value like 0 or empty array. To do so, we recommand implementing a custom operator that takes an optional value as well as a tuple containing the default value of the same type and a error message for the context.
+Although crashing on production is not always the ideal. Often you prefer crashing on debug but in production handle the error with a default value like 0 or empty array. To do so, we recommand implementing a custom operator that takes an optional value as well as a tuple containing the default value of the same type and a error message for the context.
 
 ```swift
 infix operator ?! {}
