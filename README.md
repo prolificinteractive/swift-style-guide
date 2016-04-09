@@ -22,6 +22,7 @@
 	* [Implicit Getters](#implicit-getters)
 	* [Enums](#enums)
 	* [Use of `final`](#use-of-final)
+	* [Documentation](#documentation)
 * [Best Practices](BestPractices.md)
 
 
@@ -659,4 +660,12 @@ internal final class SubClass: BaseClass {
 
 
 *Rationale* Subclassing in instances where the original class was not built to support subclasses can be a common source of bugs. Marking classes as `final`
-indicates that it was developed under the assumption that it would act on its own without regard for subclasses. 
+indicates that it was developed under the assumption that it would act on its own without regard for subclasses.
+
+### Documentation ###
+
+A well documented code is critical to help other developers understanding what the code is doing. Every **public** and **internal** types should be documented. The documentation format should follow the markup format referenced by [Apple](https://developer.apple.com/library/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/). If possible, try to include keywords that can help understanding what you are documenting, such as `authors` to specify the authors of the code, `important` to highlight critical information or `seealso`  to add references to the code like documentation or tutorials.
+
+Additionally the developer should annotate a private function if the behavior of it is not trivial using the regular comment syntax `//`.
+
+*Rationale* A code without documentation is harder to understand, it is a best practice to document your code to help other developers understand the project, especially when your project contains public APIs.
