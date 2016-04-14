@@ -61,25 +61,32 @@ The standard Swift library provides you different assertion functions that affec
 
 #### Production ####
 
-Although crashing on production is not always the ideal. Often you prefer crashing on debug but in production handle the error with a default value like 0 or empty array. To do so, we recommand implementing a custom operator that takes an optional value as well as a tuple containing the default value of the same type and a error message for the context.
+Although crashing on production is not always the ideal. Often you prefer crashing on debug but in production handle the error with a default value like 0 or empty array. To do so, we recommand implementing a function that takes an optional value as well as a tuple containing the default value of the same type and a error message for the context.
+
+```swift
+func nilOrDefault<T>(value: T?, @autoclosure defaultValue: () -> (value: T, text: String)) -> T {
+    assert(value != nil, defaultValue().text)
+    return value ?? defaultValue().value
+}
+
+let integer = nilOrDefault(Int("s"), defaultValue: (value: 0, text: "Expected int not working"))
+// crash in Debug
+// 0 in Release
+```
+
+You can also define a custom operator doing the same thing if you want a more concise syntax:
 
 ```swift
 infix operator ?! {}
 
 func ?!<T>(wrapped: T?, @autoclosure nilDefault: () -> (value: T, text: String)) -> T {
-    assert(wrapped != nil, nilDefault().text)
-    return wrapped ?? nilDefault().value
+    return nilOrDefault(wrapped, defaultValue: (value: value, text: text))
 }
-```
 
-And how to use it:
-
-```swift
 let integer = Int(string) ?! (0, “Expected integer, got \(string)”)
-// crash in debug
-// 0 in production
+// crash in Debug
+// 0 in Release
 ```
-
 
 ### Property Observers ###
 Cf Apple documentation:
