@@ -168,8 +168,7 @@ let height = CGRectGetHeight(rect)
 
 #### Type Declarations ####
 
-When declaring types, the colon should be placed immediately after the identifier followed by one space
-and the type name.
+When declaring types, the colon should be placed immediately after the identifier followed by one space and the type name.
 
 ```swift
 
@@ -188,16 +187,58 @@ let myDictionary: [String: AnyObject] = ["String": 0]
 
 #### typealias ####
 
-Typealias declaration should precede any other type declaration.
+Typealias declarations should precede any other type declaration.
 
 
 ```swift
-
-typealias ClosureType = (ParameterTypes) -> (ReturnType)
-typealias AgeAndNameProcessor = (Integer, String) -> Void
+// typealias ClosureType = (ParameterTypes) -> (ReturnType)
+typealias AgeAndNameProcessor = (Int, String) -> Void
 
 var intValue: Int
 
+class Object {
+
+	private var someString = ""
+
+	func returnOne() -> Int {
+		return 1
+	}
+
+}
+```
+
+If declaring a typealias for protocol conformance, it should be declared at the top of the type declaration, before anything else.
+
+
+```swift
+protocol Configurable {
+
+    associatedtype InputData
+
+    func configure(data: InputData) -> Void
+
+}
+
+class ExampleWillNeed {
+
+    var x: String = ""
+    var y: String = ""
+
+}
+
+class Example: Configurable {
+
+    typealias InputData = ExampleWillNeed
+
+    var a: String = ""
+    var b: String = ""
+
+    func configure(data: InputData)  {
+        a = data.x
+        b = data.y
+    }
+
+}
 ```
 
 #### Type Inference ####
@@ -222,8 +263,7 @@ var name: String? = "John" // Compiler would infer this not to be optional, but 
 ```
 
 *Rationale* The compiler is pretty smart, and we should utilize it where necessary. It is generally obvious what the
-type is going to be in the instances above, so unless we need to be more explicit (as in the last examples above),
-it is better to omit unneeded words.
+type is going to be in the instances above, so unless we need to be more explicit (as in the last examples above), it is better to omit unneeded words.
 
 ### Statement Termination ###
 
@@ -331,7 +371,7 @@ internal final class MyObject {
 	let value = 0
 ```
 
-In addition, include a space before the type declarations closing bracket:
+In addition, include a space before the type declaration's closing bracket:
 
 ```swift
 internal final class MyObject {
@@ -475,8 +515,7 @@ of how they wish to handle the result of this failable operation.
 
 #### NSError ####
 
-In general, you should avoid `NSError` in Swift in favor of defining your own `ErrorType`. However, in the event you do need to use `NSError`
-(for interop with Objective-C, for instance):
+In general, you should avoid `NSError` in Swift in favor of defining your own `ErrorType`. However, in the event you do need to use `NSError` (for interop with Objective-C, for instance):
 
 * Define a proper domain for your `NSError`. This should be specific to your module and ideally would be reflective of your bundle identifier (i.e. `com.prolificinteractive.MyApp`)
 * Define a list of the various error codes and what they translate to. These should be some sort of easily readable constant or enum value so that way the caller is able to determine what exactly failed.
@@ -489,11 +528,13 @@ the modifier is needed:
 
 ```swift
 internal final class Object {
+
     var myInt: Int
 
     private func doWork() {
         ...
     }
+
 }
 
 ```
