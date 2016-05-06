@@ -1,4 +1,4 @@
-# Prolific Swift Style Guide
+![Swift Style Guide](Swift_style_guide.jpg)
 
 ## Table Of Contents ##
 
