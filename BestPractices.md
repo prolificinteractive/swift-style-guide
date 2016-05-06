@@ -187,23 +187,21 @@ Retain cycle doesn't apply to Swift structs since they are passed by value and n
 
 ### Documentation ###
 
-Documentation is part of Prolific Swift Style Guide, here are some best practices that can be applied to improve your documentation.
-
 #### Format ####
 
-Apple provides two ways to document your code. You can use either `///` to have a one line documentation, or `/** */` to have mulitple lines documentation. Most of the time prefer use the `/** */` as it allows more flexibility in your documentation.
+The documentation format should follow the markup format referenced by [Apple](https://developer.apple.com/library/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/).
 
 #### VVDocumenter ####
 
-[VVDocumenter](https://github.com/onevcat/VVDocumenter-Xcode) is a Xcode plugin that generates the documentation for you, and provides inline placeholders so you can fill everything easily.
+[VVDocumenter](https://github.com/onevcat/VVDocumenter-Xcode) is an Xcode plugin that generates the documentation for you, and provides inline placeholders so you can fill everything easily.
 
 #### Shared Views ####
 
-If you are sharing a view across your app, it is a best practice to provide a screenshot of it in the documentation to have a quick visual feedback on the look of your view. To do so, you can use the markup format : `![Screenshot](htt://www.myscreenshotaddress/image.jpg)`
+If you are sharing a view across your app, provide a screenshot of it in the documentation to have a quick visual feedback on the look of your view. To do so, you can use the markup format : `![Screenshot](htt://www.myscreenshotaddress/image.jpg)`
 
 #### References ####
 
-When you document some code that is coming from a tutorial or is referenced in a public document, it is a good practice to provide the reference of it in your documentation. To do so you can use the `seealso` keyword from the Apple Markup Format.
+When you document some code that is coming from a tutorial or is referenced in a public document, provide the reference of it in your documentation. To do so you can use the `seealso` keyword from the Apple Markup Format.
 
 ```
 /**
@@ -215,4 +213,4 @@ When you document some code that is coming from a tutorial or is referenced in a
 
 #### Annotations ####
 
-You can also provide different annotations to inform the developer about the code she/he is looking at. Different keywords are available, such as `important` to highlight critical information, `note` to provide additional information, `warning` to warn other developers about this piece of code.
+You can provide different annotations to inform other developers about the code they are looking at. Different keywords are available, such as `important` to highlight critical information, `note` to provide additional information, `warning` to warn other developers about this piece of code.
