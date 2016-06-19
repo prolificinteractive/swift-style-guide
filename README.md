@@ -456,6 +456,7 @@ internal func doSomething() {
 
 // Wrong!
 weak public var obj: Object?
+```
 
 ### Imports ###
 
