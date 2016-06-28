@@ -150,6 +150,24 @@ let scaleString = scale.stringValue
 let scaleInt = scale.integerValue
 ```
 
+Always use Swift equivalent of an Objective-C function whenever possible. For example when manipulating a CGRect variable:
+
+**Preferred:**
+```swift
+let rect = CGRect()
+let width = rect.width
+let height = rect.height
+```
+
+**Not preferred:**
+```swift
+let rect = CGRect()
+let width = CGRectGetWidth(rect)
+let height = CGRectGetHeight(rect)
+```
+
+*Rationale*: Objective-C functions are making the code less readable, also using Swift equivalents will always help transitioning from a Swift version to another.
+
 
 ### Statement Termination ###
 
