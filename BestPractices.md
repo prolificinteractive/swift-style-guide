@@ -4,6 +4,14 @@ This is Prolific's Swift best practices document.
 
 The purpose of these best practices is to help you keep clean and bug free Swift code that is recommended to follow in your daily work.
 
+## Table Of Contents ##
+
+* [Nil Checking](#nil-checking)
+* [Assertion Management](#assertion-management)
+* [Property Observers](#property-observers)
+* [Retain Cycle](#retain-cycle)
+* [Documentation](#documentation)
+
 ### Nil Checking ###
 
 Though we have conventions for nil checking in the swift style guide, below are some suggestions for nil checking in certain situations.
@@ -176,3 +184,33 @@ internal final class MyClass {
 Retain cycle doesn't apply to Swift structs since they are passed by value and not by reference.
 
 *Rationale* Retain cycle bugs are very easy to reproduce, being very careful when manipulating pointers is crucial to build a solid app.
+
+### Documentation ###
+
+#### Format ####
+
+The documentation format should follow the markup format referenced by [Apple](https://developer.apple.com/library/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/).
+
+#### VVDocumenter ####
+
+[VVDocumenter](https://github.com/onevcat/VVDocumenter-Xcode) is an Xcode plugin that generates the documentation for you, and provides inline placeholders so you can fill everything easily.
+
+#### Shared Views ####
+
+If you are sharing a view across your app, it can be helpful to provide a screenshot of it in the documentation to have a quick visual feedback on the look of your view. To do so, you can use the markup format : `![Screenshot](htt://www.myscreenshotaddress/image.jpg)`
+
+#### References ####
+
+When you document some code that is coming from a tutorial or is referenced in a public document, you should provide the reference of it in your documentation. To do so you can use the `seealso` keyword from the Apple Markup Format.
+
+```
+/**
+ This is my documentation.
+
+- seealso: [The Prolific Swift Style Guide](https://github.com/prolificinteractive/swift-style-guide)
+*/
+```
+
+#### Annotations ####
+
+You can provide different annotations to inform other developers about the code they are looking at. Different keywords are available, such as `important` to highlight critical information, `note` to provide additional information, `warning` to warn other developers about this piece of code.

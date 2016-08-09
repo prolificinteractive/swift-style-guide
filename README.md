@@ -20,6 +20,7 @@
 	* [Implicit Getters](#implicit-getters)
 	* [Enums](#enums)
 	* [Use of `final`](#use-of-final)
+	* [Documentation](#documentation)
 * [Best Practices](BestPractices.md)
 
 
@@ -731,3 +732,12 @@ internal final class SubClass: BaseClass {
 
 *Rationale* Subclassing in instances where the original class was not built to support subclasses can be a common source of bugs. Marking classes as `final`
 indicates that it was developed under the assumption that it would act on its own without regard for subclasses.
+
+### Documentation ###
+
+Well documented code is critical to help other developers understand what the code is doing. Every **public** and **internal** types should be documented.
+Additionally developers should annotate any private piece of code when its behavior is not trivial using the regular comment syntax `//`.
+
+See our [best practices](BestPractices.md#documentation) about documenting the code.
+
+*Rationale* A code without documentation is harder to understand, it is a good practice to document your code to help other developers understand the project, especially when it contains public APIs.
