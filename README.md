@@ -16,8 +16,6 @@
 	* [Error Handling](#error-handling)
 	* [Access Modifiers](#access-modifiers)
 	* [Imports](#imports)
-	* [Type Declarations](#type-declarations)
-	* [Type Inference](#type-inference)
 	* [Nil Checking](#nil-checking)
 	* [Implicit Getters](#implicit-getters)
 	* [Enums](#enums)
@@ -27,7 +25,7 @@
 
 ## Overview ##
 
-This is Prolific's style guide for writing code in Swift. The purpose of this guide is to develop 
+This is Prolific's style guide for writing code in Swift. The purpose of this guide is to develop
 a universal standard for Swift code that makes our codebases consistent and easy to read. This guide aims for
 consistent and clean code written in Swift in line with Apple and the general community.
 
@@ -46,16 +44,16 @@ to solve and the rationale to do so. When submitting a pull request, consider:
 * Does my suggestion fall in line with Apple's desire for the language?
 * Does your suggestion invalidate a language feature?
 
-Make sure to consider the resources in the open-source Swift repo; specifically, read through the various 
-[proposals](https://github.com/apple/swift-evolution/tree/master/proposals) for new language features as well as the 
-[most-commonly rejected proposals](https://github.com/apple/swift-evolution/blob/master/commonly_proposed.md) in order to 
+Make sure to consider the resources in the open-source Swift repo; specifically, read through the various
+[proposals](https://github.com/apple/swift-evolution/tree/master/proposals) for new language features as well as the
+[most-commonly rejected proposals](https://github.com/apple/swift-evolution/blob/master/commonly_proposed.md) in order to
 guide your design principals.
 
 ## Linter ##
 
 In order to automate many of the rules here, we recommend using [our fork of Swiftlint](https://github.com/prolificinteractive/SwiftLint) in your Swift codebase.
-While the main fork of Swiftlint is based around the GitHub style guide for Swift, our fork has additional rules and corrections for rules specific to our 
-style guide that you will not find in the GitHub one. 
+While the main fork of Swiftlint is based around the GitHub style guide for Swift, our fork has additional rules and corrections for rules specific to our
+style guide that you will not find in the GitHub one.
 
 
 ## Standards ##
@@ -168,10 +166,108 @@ let height = CGRectGetHeight(rect)
 
 *Rationale*: Objective-C functions are making the code less readable, also using Swift equivalents will always help transitioning from a Swift version to another.
 
+#### Type Declarations ####
+
+When declaring types, the colon should be placed immediately after the identifier followed by one space and the type name.
+
+```swift
+
+var intValue: Int
+
+// Do NOT do this
+var intValue : Int
+
+```
+
+In all use-cases, the colon should be associated with the left-most item with no spaces preceding and one space afterwards:
+
+```swift
+let myDictionary: [String: AnyObject] = ["String": 0]
+```
+
+#### typealias ####
+
+Typealias declarations should precede any other type declaration.
+
+
+```swift
+// typealias ClosureType = (ParameterTypes) -> (ReturnType)
+typealias AgeAndNameProcessor = (Int, String) -> Void
+
+var intValue: Int
+
+class Object {
+
+	private var someString = ""
+
+	func returnOne() -> Int {
+		return 1
+	}
+
+}
+```
+
+If declaring a typealias for protocol conformance, it should be declared at the top of the type declaration, before anything else.
+
+
+```swift
+protocol Configurable {
+
+    associatedtype InputData
+
+    func configure(data: InputData) -> Void
+
+}
+
+class ExampleWillNeed {
+
+    var x: String = ""
+    var y: String = ""
+
+}
+
+class Example: Configurable {
+
+    typealias InputData = ExampleWillNeed
+
+    var a: String = ""
+    var b: String = ""
+
+    func configure(data: InputData)  {
+        a = data.x
+        b = data.y
+    }
+
+}
+```
+
+#### Type Inference ####
+
+Prefer letting the compiler infer the type instead of explicitly stating it, wherever possible:
+
+```swift
+var max = 0 		// Int
+var name = "John" 	// String
+var rect = CGRect()	// CGRect
+
+// Do not do:
+
+var max: Int = 0
+var name: String = "John"
+var rect: CGRect = CGRect()
+
+// Ok since the inferred type is not what we wanted:
+
+var max: Hashable = 0 // Compiler would infer Int, but we only want it to be hashable
+var name: String? = "John" // Compiler would infer this not to be optional, but we may need to nil it out later.
+```
+
+*Rationale* The compiler is pretty smart, and we should utilize it where necessary. It is generally obvious what the
+type is going to be in the instances above, so unless we need to be more explicit (as in the last examples above), it is better to omit unneeded words.
 
 ### Statement Termination ###
 
-Unlike Objective-C, omit the use of `;` to terminate statements. Instead, simply use new lines to indicate the end of a statement. 
+Unlike Objective-C, omit the use of `;` to terminate statements. Instead, simply use new lines to indicate the end of a statement.
 
 ```swift
 let myVar = 0
@@ -216,21 +312,21 @@ with other variable declarations.
 
 class Object {
 	private var name = ""
-	
+
 	func useName() {
 		// Let self be implied when it can be understood.
 		otherObject.doSomethingWithName(name)
 		setName("Will Smith")
 	}
-	
+
 	func setName(name: String) {
 		// Use self here to prevent conflicts with the `name` parameter being passed.
 		self.name = name
 	}
-	
+
 	func setNameAsync(newName: String) {
 		// Use implicit self outside closures...
-		otherObject.doSomethingWithName(name, then: { 
+		otherObject.doSomethingWithName(name, then: {
 			// .. but within, you must use self to ease the compiler.
 			self.setName("Jason")
 		})
@@ -242,27 +338,6 @@ class Object {
 *Rationale*: The idea behind this is that implicit use of self makes the conditions where you _must_ use self
 (for instance, within closures) much more apparent and will make you think more on the reasons why you are using it.
 In closures, think about: should `self` be `weak` instead of `strong`? Apple has even rejected a request to enforce use of `self` for this reason, [among others](http://ericasadun.com/2016/01/06/the-swift-evolution-proposal-se-0009-rejection/).
-
-### Structs & Classes ###
-
-In Swift, structs maintain value semantics which means their values are copied when assigned. Classes, on the other hand, act like pointers from C
-and Objective-C; they are called reference types and the internal data is shared amongst instances of assigning.
-
-When composing your types, consider carefully what they're going to be used for before choosing what they should end up being. In general, 
-consider structs for types that are:
-
-* Immutable
-* Stateless
-* Have a definition for equality
-
-Swift structs also have other, tangible benefits as well:
-
-* Faster 
-* Safer due to copying rather than referencing
-* Thread safe -- copies allow mutations to happen independently of other instances.
-
-In general, you should favor structs and protocols over classes; even in cases where polymorphism would dictate the usage of a class, consider if you can
-achieve a similar result via protocols and extensions. This allows you to achieve polymorphism via *composition* rather than *inheritance*.
 
 
 ### Bracket Syntax ###
@@ -282,7 +357,7 @@ func doSomething() {
 if true == false {
 }
 
-let doSomething: () -> Void = { 
+let doSomething: () -> Void = {
 }
 
 ```
@@ -296,17 +371,17 @@ internal final class MyObject {
 	let value = 0
 ```
 
-In addition, include a space before the type declarations closing bracket:
+In addition, include a space before the type declaration's closing bracket:
 
 ```swift
 internal final class MyObject {
-	
+
 	let value = 0
-	
+
 	func doSomething() {
 		value += 1
 	}
-	
+
 }
 ```
 
@@ -318,7 +393,7 @@ extension MyObject {
 	func doAnotherThing() {
 		...
 	}
-	
+
 }
 ```
 
@@ -373,7 +448,7 @@ func multiplyEvensLessThan10(evenNumber: Int) -> Int? {
 	guard evenNumber % 2 == 0 && evenNumber < 10 else {
 		return nil
 	}
-	
+
 	return evenNumber * 2
 }
 
@@ -393,11 +468,11 @@ func multiplyEvens(evenNumber: Int) throws -> Int {
 	guard evenNumber % 2 == 0 else {
 		throw NumberError.NotEven
 	}
-	
+
 	guard evenNumber < 10 else {
 		throw NumberError.TooLarge
 	}
-	
+
 	return evenNumber * 2
 }
 
@@ -440,8 +515,7 @@ of how they wish to handle the result of this failable operation.
 
 #### NSError ####
 
-In general, you should avoid `NSError` in Swift in favor of defining your own `ErrorType`. However, in the event you do need to use `NSError` 
-(for interop with Objective-C, for instance):
+In general, you should avoid `NSError` in Swift in favor of defining your own `ErrorType`. However, in the event you do need to use `NSError` (for interop with Objective-C, for instance):
 
 * Define a proper domain for your `NSError`. This should be specific to your module and ideally would be reflective of your bundle identifier (i.e. `com.prolificinteractive.MyApp`)
 * Define a list of the various error codes and what they translate to. These should be some sort of easily readable constant or enum value so that way the caller is able to determine what exactly failed.
@@ -454,11 +528,13 @@ the modifier is needed:
 
 ```swift
 internal final class Object {
+
     var myInt: Int
 
     private func doWork() {
         ...
     }
+
 }
 
 ```
@@ -496,50 +572,26 @@ import UIKit
 @testable import MyLibrary
 ```
 
-### Type Declarations ###
+### Structs & Classes ###
 
-When declaring types, the colon should be placed immediately after the identifier followed by one space
-and the type name.
+In Swift, structs maintain value semantics which means their values are copied when assigned. Classes, on the other hand, act like pointers from C
+and Objective-C; they are called reference types and the internal data is shared amongst instances of assigning.
 
-```swift
+When composing your types, consider carefully what they're going to be used for before choosing what they should end up being. In general,
+consider structs for types that are:
 
-var intValue: Int
+* Immutable
+* Stateless
+* Have a definition for equality
 
-// Do NOT do this
-var intValue : Int
+Swift structs also have other, tangible benefits as well:
 
-```
+* Faster
+* Safer due to copying rather than referencing
+* Thread safe -- copies allow mutations to happen independently of other instances.
 
-In all use-cases, the colon should be associated with the left-most item with no spaces preceding and one space afterwards:
-
-```swift
-let myDictionary: [String: AnyObject] = ["String": 0]
-```
-
-### Type Inference ###
-
-Prefer letting the compiler infer the type instead of explcitly stating it, wherever possible:
-
-```swift
-var max = 0 		// Int
-var name = "John" 	// String
-var rect = CGRect()	// CGRect
-
-// Do not do:
-
-var max: Int = 0
-var name: String = "John"
-var rect: CGRect = CGRect()
-
-// Ok since the inferred type is not what we wanted:
-
-var max: Hashable = 0 // Compiler would infer Int, but we only want it to be hashable
-var name: String? = "John" // Compiler would infer this not to be optional, but we may need to nil it out later.
-```
-
-*Rationale* The compiler is pretty smart, and we should utilize it where necessary. It is generally obvious what the 
-type is going to be in the instances above, so unless we need to be more explicit (as in the last examples above),
-it is better to omit unneeded words.
+In general, you should favor structs and protocols over classes; even in cases where polymorphism would dictate the usage of a class, consider if you can
+achieve a similar result via protocols and extensions. This allows you to achieve polymorphism via *composition* rather than *inheritance*.
 
 ### Nil Checking ###
 
@@ -627,7 +679,7 @@ internal enum State {
 	case Closed
 	case Pending
 	case Faulted
-	
+
 	func nextState() -> State {
 		...
 	}
@@ -650,32 +702,32 @@ any function or variable that should not be overriden by a subclass should be di
 
 ```swift
 // Not built for inheritance.
-internal final class Object { 
+internal final class Object {
 
 }
 
 // Purposefully utilizable as a base class
-internal class BaseClass { 
-	
+internal class BaseClass {
+
 	func doSomething () {
 	}
-	
+
 	// Properly marked as final so subclasses cannot override
-	final func update() { 
+	final func update() {
 	}
-	
+
 }
 
 internal final class SubClass: BaseClass {
-	
+
 	override func doSomething() {
 		update()
 	}
-	
+
 }
 
 ```
 
 
 *Rationale* Subclassing in instances where the original class was not built to support subclasses can be a common source of bugs. Marking classes as `final`
-indicates that it was developed under the assumption that it would act on its own without regard for subclasses. 
+indicates that it was developed under the assumption that it would act on its own without regard for subclasses.
