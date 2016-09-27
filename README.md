@@ -59,6 +59,103 @@ style guide that you will not find in the GitHub one.
 
 ## Standards ##
 
+### Naming Convention ###
+
+The Apple Swift [API design guidelines](https://swift.org/documentation/api-design-guidelines/) promote clarity over brevity.
+
+Capitalize all type names with camel case, while function and variable names start with a lower case.
+
+```swift
+class MyClass { }
+protocol MyProtocol { }
+func myFunction { }
+```
+
+Avoid acronyms and abbreviations for clarity and readability. If you have to use an acronym, use upper case.
+
+```swift
+productURL = NSURL()
+userID = "12345"
+```
+
+#### Protocols ####
+
+Protocol names describing something should be a noun: `Collection`, `Element`. Protocol names describing an ability should end with “ing” or “able”: `Evaluatable`, `Printable`, `Formatting`.
+
+#### Enum ####
+
+Enum cases start with a lower case and use camel case.
+
+```
+enum Color {
+    case red
+    case blue
+    case green
+    case lightBlue
+}
+```
+
+#### Functions ####
+
+Name your function with words that describe its behavior. Here is an example with a function that removes an element at an index x.
+
+**Preferred:**
+```swift
+func remove(at index: Index) -> Element
+```
+
+**Not Preferred:**
+```swift
+func remove(index: Index) -> Element
+```
+
+*Rationale*: It is better to specify that we are removing the element at the given index, and we are not trying to remove the given parameter itself, to make the behavior of the function very clear.
+
+Avoid unnecessary words in the function name.
+
+**Preferred:**
+```swift
+func remove(_ element: Element) -> Element?
+```
+
+**Not Preferred:**
+```swift
+func removeElement(_ element: Element) -> Element?
+```
+
+*Rationale*: It makes the code clear and more concise. Adding extra unnecessary words will make the code harder to read and understand.
+
+Name your functions based on their side effects and behaviors.
+
+* With side effects: use **imperative verb** phrases
+	* `print(x)`, `x.sort()`, `x.append(y)`
+* Without side effects: use **noun** phrases
+	* `x.formattedName()`, `x.successor()`
+
+When the function can be described by a verb, use an imperative verb for the mutating function and apply “ed” or “ing” to the nonmutating function:
+* Mutating function
+	* `x.sort()`
+	* `x.append(y)`
+* Nonmutating function
+	* `z = x.sorted()`
+	* `z = x.appending(y)`
+
+Apple encourages to name functions to be read as a sentence according to their side effects.
+
+**Preferred:**
+```swift
+x.insert(y, at: z)          “x, insert y at z”
+x.subViews(havingColor: y)  “x's subviews having color y”
+x.capitalizingNouns()       “x, capitalizing nouns”
+```
+
+**Not Preferred:**
+```swift
+x.insert(y, position: z)
+x.subViews(color: y)
+x.nounCapitalize()
+```
+
 ### File structure ###
 
 You should not define multiple public/internal types (ie class, struct, enum) in the same file; each type should have its own file.
@@ -189,7 +286,6 @@ let myDictionary: [String: AnyObject] = ["String": 0]
 #### typealias ####
 
 Typealias declarations should precede any other type declaration.
-
 
 ```swift
 // typealias ClosureType = (ParameterTypes) -> (ReturnType)
@@ -461,8 +557,8 @@ is more Objective-C than Swift in its composition. The caller may not know which
 ```swift
 
 internal enum NumberError: ErrorType {
-	case NotEven
-	case TooLarge
+	case notEven
+	case tooLarge
 }
 
 func multiplyEvens(evenNumber: Int) throws -> Int {
@@ -649,10 +745,10 @@ For enum declarations, declare each enum case on a new line with its own `case` 
 
 ```swift
 internal enum State {
-	case Open
-	case Closed
-	case Pending
-	case Faulted
+	case open
+	case closed
+	case pending
+	case faulted
 }
 ```
 
@@ -667,8 +763,8 @@ For enums with raw values, declare the raw value on the same line as its declara
 
 ```swift
 internal enum HTTPMethod: String {
-	case Get = "GET"
-	case Post = "POST"
+	case get = "GET"
+	case post = "POST"
 }
 ```
 
@@ -676,10 +772,10 @@ For any other functions or properties associated with the enum, place them after
 
 ```swift
 internal enum State {
-	case Open
-	case Closed
-	case Pending
-	case Faulted
+	case open
+	case closed
+	case pending
+	case faulted
 
 	func nextState() -> State {
 		...
