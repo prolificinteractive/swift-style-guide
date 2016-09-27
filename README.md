@@ -185,8 +185,10 @@ After the type declaration:
 
 Each section above should be organized by accessibility:
 
+* Open
 * Public
 * Internal
+* Fileprivate
 * Private
 
 When implementing a protocol you should create an extension of your class that lives in the same file to separate the core logic of your class and your protocol implementation.
