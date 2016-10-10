@@ -59,16 +59,19 @@ style guide that you will not find in the GitHub one.
 
 ## Standards ##
 
-### Naming Convention ###
+### Naming Conventions ###
 
-The Apple Swift [API design guidelines](https://swift.org/documentation/api-design-guidelines/) promote clarity over brevity.
+The Apple Swift [API design guidelines](https://swift.org/documentation/api-design-guidelines/) promote clarity over brevity. Code should be concise, readable and clear at the point of use. However, having compact code that sacrifices clarity is a non-goal.
 
-Capitalize all type names with camel case, while function and variable names start with a lower case.
+#### Types ####
+
+Write all type names with UpperCamelCase, function and variable names with lowerCamelCase.
 
 ```swift
 class MyClass { }
 protocol MyProtocol { }
-func myFunction { }
+func myFunction() { }
+var myVariable: String
 ```
 
 Avoid acronyms and abbreviations for clarity and readability. If you have to use an acronym, use upper case.
@@ -82,9 +85,9 @@ userID = "12345"
 
 Protocol names describing something should be a noun: `Collection`, `Element`. Protocol names describing an ability should end with “ing” or “able”: `Evaluatable`, `Printable`, `Formatting`.
 
-#### Enum ####
+#### Enums ####
 
-Enum cases start with a lower case and use camel case.
+Enum cases start with lowerCamelCase.
 
 ```
 enum Color {
@@ -123,30 +126,30 @@ func remove(_ element: Element) -> Element?
 func removeElement(_ element: Element) -> Element?
 ```
 
-*Rationale*: It makes the code clear and more concise. Adding extra unnecessary words will make the code harder to read and understand.
+*Rationale*: It makes the code clearer and more concise. Adding extra unnecessary words will make the code harder to read and understand.
 
 Name your functions based on their side effects and behaviors.
 
-* With side effects: use **imperative verb** phrases
+* With side effects: use **imperative verb** phrases:
 	* `print(x)`, `x.sort()`, `x.append(y)`
-* Without side effects: use **noun** phrases
+* Without side effects: use **noun** phrases:
 	* `x.formattedName()`, `x.successor()`
 
 When the function can be described by a verb, use an imperative verb for the mutating function and apply “ed” or “ing” to the nonmutating function:
-* Mutating function
+* Mutating function:
 	* `x.sort()`
 	* `x.append(y)`
-* Nonmutating function
+* Nonmutating function:
 	* `z = x.sorted()`
 	* `z = x.appending(y)`
 
-Apple encourages to name functions to be read as a sentence according to their side effects.
+Name functions to be read as a sentence according to their side effects.
 
 **Preferred:**
 ```swift
-x.insert(y, at: z)          “x, insert y at z”
-x.subViews(havingColor: y)  “x's subviews having color y”
-x.capitalizingNouns()       “x, capitalizing nouns”
+x.insert(y, at: z)          // x, insert y at z
+x.subViews(havingColor: y)  // x's subviews having color y
+x.capitalizingNouns()       // x, capitalizing nouns
 ```
 
 **Not Preferred:**
@@ -614,7 +617,7 @@ of how they wish to handle the result of this failable operation.
 
 In general, you should avoid `NSError` in Swift in favor of defining your own `ErrorType`. However, in the event you do need to use `NSError` (for interop with Objective-C, for instance):
 
-* Define a proper domain for your `NSError`. This should be specific to your module and ideally would be reflective of your bundle identifier (i.e. `com.prolificinteractive.MyApp`)
+* Define a proper domain for your `NSError`. This should be specific to your module and ideally would be reflective of your bundle identifier (e.g. `com.prolificinteractive.MyApp`).
 * Define a list of the various error codes and what they translate to. These should be some sort of easily readable constant or enum value so that way the caller is able to determine what exactly failed.
 * In the userInfo, include _at least_ a localized description (`NSLocalizedDescriptionKey`) that accurately and concisely describes the nature of the error.
 
