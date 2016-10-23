@@ -1,6 +1,6 @@
 # BEST PRACTICES #
 
-This is Prolific's Swift best practices document. 
+This is Prolific's Swift best practices document.
 
 The purpose of these best practices is to help you keep clean and bug free Swift code that is recommended to follow in your daily work.
 
@@ -11,6 +11,7 @@ The purpose of these best practices is to help you keep clean and bug free Swift
 * [Property Observers](#property-observers)
 * [Retain Cycle](#retain-cycle)
 * [Documentation](#documentation)
+* [Access Control](#access-control)
 
 ### Nil Checking ###
 
@@ -134,7 +135,7 @@ Be careful to use *didSet* only on an initialized property. A typical example wh
 ```swift
 class myViewController: UIViewController {
 	@IBOutlet weak var label: UILabel!
-	
+
 	var text: String {
 		didSet {
 			self.label.text = text
@@ -166,7 +167,7 @@ internal final class MyClass {
     func myFunction() {
         delegate?.doSomething()
     }
-    
+
     func myFunctionWithClosure() {
     	let closure = { [weak self, unowned notNilInstance] in
 	    self?.doSomething() // weak variables are optionals
@@ -214,3 +215,9 @@ When you document some code that is coming from a tutorial or is referenced in a
 #### Annotations ####
 
 You can provide different annotations to inform other developers about the code they are looking at. Different keywords are available, such as `important` to highlight critical information, `note` to provide additional information, `warning` to warn other developers about this piece of code.
+
+### Access Control ###
+
+When choosing access levels for types defined within your project, follow Apple's [recommendations](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AccessControl.html). For single-target apps, `internal` or a more restrictive access level should be used. For frameworks and code that need to be accessed from a different module, expose the public-facing interface using `public` or `open`. Implementation details such framework can and should still be hidden with the default access level of `internal`.
+
+Start with the most restrictive access level, `private`, and increase access as needed (`private` -> `fileprivate` -> `internal`), when defining member constants, variables or functions. If a type's member or function needs to be accessed from a protocol conformance extension within the same file as described in [this section](https://github.com/prolificinteractive/swift-style-guide#file-structure), use the access level of `fileprivate`.
