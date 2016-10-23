@@ -836,7 +836,7 @@ indicates that it was developed under the assumption that it would act on its ow
 
 ### Documentation ###
 
-Well documented code is critical to help other developers understand what the code is doing. Every **public** and **internal** types should be documented.
+Well documented code is critical to help other developers understand what the code is doing. Every **open**, **public** and **internal** types should be documented.
 Additionally developers should annotate any private piece of code when its behavior is not trivial using the regular comment syntax `//`.
 
 See our [best practices](BestPractices.md#documentation) about documenting the code.
