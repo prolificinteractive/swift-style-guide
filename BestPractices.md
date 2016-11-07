@@ -218,6 +218,10 @@ You can provide different annotations to inform other developers about the code 
 
 ### Access Control ###
 
-When choosing access levels for types defined within your project, follow Apple's [recommendations](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AccessControl.html). For single-target apps, `internal` or a more restrictive access level should be used. For frameworks and code that need to be accessed from a different module, expose the public-facing interface using `public` or `open`. Implementation details such framework can and should still be hidden with the default access level of `internal`.
+```
+private (most restrictive) -> fileprivate -> internal -> public -> open (least restrictive)
+```
 
-Start with the most restrictive access level, `private`, and increase access as needed (`private` -> `fileprivate` -> `internal`), when defining member constants, variables or functions. If a type's member or function needs to be accessed from a protocol conformance extension within the same file as described in [this section](https://github.com/prolificinteractive/swift-style-guide#file-structure), use the access level of `fileprivate`.
+Starting with Swift 3, Apple has introduced two new access levels, `open` and `fileprivate`, in addition to the existing three. When choosing access levels for types defined within your project, follow Apple's [recommendations](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AccessControl.html). For single-target apps, `internal` or a more restrictive access level should be used. For frameworks and code that need to be accessed from a different module, expose the public-facing interface using `public` or `open`. Implementation details such framework can and should still be hidden with the default access level of `internal`.
+
+Start with the most restrictive access level, `private`, and increase access as needed when defining member constants, variables or functions. If a type's member or function needs to be accessed from a protocol conformance extension within the same file as described in [this section](https://github.com/prolificinteractive/swift-style-guide#file-structure), use the access level of `fileprivate`.
