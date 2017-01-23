@@ -1,10 +1,10 @@
-# Best Practices #
+# Best Practices
 
 This is Prolific's Swift best practices document.
 
 The purpose of these best practices is to help you keep clean and bug free Swift code that is recommended to follow in your daily work.
 
-## Table Of Contents ##
+# Table Of Contents
 
 * [Nil Checking](#nil-checking)
 * [Assertion Management](#assertion-management)
@@ -13,7 +13,7 @@ The purpose of these best practices is to help you keep clean and bug free Swift
 * [Documentation](#documentation)
 * [Access Control](#access-control)
 
-### Nil Checking ###
+## Nil Checking
 
 Though we have conventions for nil checking in the swift style guide, below are some suggestions for nil checking in certain situations.
 
@@ -41,7 +41,7 @@ if item == nil {
 }
 ```
 
-### Assertion management ###
+## Assertion management
 
 When working with optional values you have to make sure that the variable you work with doesn’t have a `nil` value. To do so you can use the different unwrapping techniques provided by the standard library, but in certain scenarios it can make sense to force unwrap your value and terminate your program (for example a wrong view controller type after instantiating from a Storyboard). In this case your app better terminate in order to avoid unexpected behaviors.
 
@@ -53,24 +53,24 @@ The standard Swift library provides you different assertion functions that affec
 * preconditionFailure
 * fataError
 
-#### assert ####
+### assert
 `assert` is only evaluated in debug mode, it means that the line will be removed in release and will not be executed.
 
-#### assertionFailure ####
+### assertionFailure
 `assertionFailure` acts like `assert` but provides some context to the compiler.
 
-#### precondition ####
+### precondition
 `precondition` ensures that the given condition is meet. If not the app will terminate. `precondition` works for both debug and release.
 
-#### preconditionFailure ####
+### preconditionFailure
 `preconditionFailure` means a fatal error and will terminate in both debug and release mode, except for unchecked builds (`-Ounchecked`), then it will never be executed.
 
-#### fatalError ####
+### fatalError
 `fatalError` acts like `preconditionFailure` but is not affected by the unchecked build flag. It will always terminate your app in both debug and release mode.
 
-#### Production ####
+### Production Builds
 
-Although crashing on production is not always the ideal. Often you prefer crashing on debug but in production handle the error with a default value like 0 or empty array. To do so, we recommand implementing a function that takes an optional value as well as a tuple containing the default value of the same type and a error message for the context.
+While forcing a crash in debug builds is acceptable for testing purposes, it is not ideal to have the program exit on assertion failure in production builds. Instead, handling the error with a default value like `0` or empty array might be preferable. To do so, we recommend implementing a function that takes an optional value as well as a tuple containing the default value of the same type and a error message for the context.
 
 ```swift
 func nilOrDefault<T>(value: T?, @autoclosure defaultValue: () -> (value: T, text: String)) -> T {
@@ -97,7 +97,7 @@ let integer = Int(string) ?! (0, “Expected integer, got \(string)”)
 // 0 in Release
 ```
 
-### Property Observers ###
+## Property Observers
 Cf Apple documentation:
 
 ```
@@ -149,7 +149,7 @@ let myViewController = UIViewController()
 myViewController.text = "Prolific" // Crash because the view controller label has not been initialized yet
 ```
 
-### Retain Cycle ###
+## Retain Cycle
 
 To avoid retain cycle in Swift -- meaning when two objects both have strong references to each other -- use **weak** and **unowned** on your references to avoid having a strong reference on both sides.
 
@@ -160,7 +160,8 @@ According to Apple's [documentation](https://developer.apple.com/library/ios/doc
 
 ```Use a weak reference whenever it is valid for that reference to become nil at some point during its lifetime. Conversely, use an unowned reference when you know that the reference will never be nil once it has been set during initialization.```
 
-##### Example #####
+#### Example
+
 ```swift
 internal final class MyClass {
 
@@ -180,31 +181,31 @@ internal final class MyClass {
 }
 ```
 
-##### Debug #####
+#### Debug
 
 [Here](http://applifebalance.com/posts/retain-cycle-instruments/) is an article on how to diagnose retain cycle bugs in your app using Instruments. Another easy way is to print inside the `deinit` function of your objects and see if they get deallocated.
 
-##### Note #####
+#### Note
 
 Retain cycle doesn't apply to Swift structs since they are passed by value and not by reference.
 
 *Rationale* Retain cycle bugs are very easy to reproduce, being very careful when manipulating pointers is crucial to build a solid app.
 
-### Documentation ###
+## Documentation
 
-#### Format ####
+### Format
 
 The documentation format should follow the markup format referenced by [Apple](https://developer.apple.com/library/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/).
 
-#### VVDocumenter ####
+### VVDocumenter
 
 [VVDocumenter](https://github.com/onevcat/VVDocumenter-Xcode) is an Xcode plugin that generates the documentation for you, and provides inline placeholders so you can fill everything easily.
 
-#### Shared Views ####
+### Shared Views
 
 If you are sharing a view across your app, it can be helpful to provide a screenshot of it in the documentation to have a quick visual feedback on the look of your view. To do so, you can use the markup format : `![Screenshot](htt://www.myscreenshotaddress/image.jpg)`
 
-#### References ####
+### References
 
 When you document some code that is coming from a tutorial or is referenced in a public document, you should provide the reference of it in your documentation. To do so you can use the `seealso` keyword from the Apple Markup Format.
 
@@ -216,11 +217,11 @@ When you document some code that is coming from a tutorial or is referenced in a
 */
 ```
 
-#### Annotations ####
+### Annotations
 
 You can provide different annotations to inform other developers about the code they are looking at. Different keywords are available, such as `important` to highlight critical information, `note` to provide additional information, `warning` to warn other developers about this piece of code.
 
-### Access Control ###
+## Access Control
 
 ```
 private (most restrictive) -> fileprivate -> internal -> public -> open (least restrictive)

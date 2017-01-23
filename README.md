@@ -25,7 +25,7 @@
 * [Best Practices](BestPractices.md)
 
 
-# Overview #
+# Overview
 
 This is Prolific's style guide for writing code in Swift. The purpose of this guide is to develop
 a universal standard for Swift code that makes our codebases consistent and easy to read. This guide aims for
@@ -58,9 +58,9 @@ While the main fork of Swiftlint is based around the GitHub style guide for Swif
 style guide that you will not find in the GitHub one.
 
 
-# Standards #
+# Standards
 
-## Naming Conventions ##
+## Naming Conventions
 
 The Apple Swift [API design guidelines](https://swift.org/documentation/api-design-guidelines/) promote clarity over brevity. Code should be concise, readable and clear at the point of use. However, having compact code that sacrifices clarity is a non-goal.
 
