@@ -1,4 +1,4 @@
-# BEST PRACTICES #
+# Best Practices #
 
 This is Prolific's Swift best practices document.
 
@@ -133,7 +133,8 @@ var dataSource: [String] {
 Be careful to use *didSet* only on an initialized property. A typical example where it is dangerous to use *didSet* is to set an IBOutlet value before the view loaded.
 
 ```swift
-class myViewController: UIViewController {
+internal final class myViewController: UIViewController {
+
 	@IBOutlet weak var label: UILabel!
 
 	var text: String {
@@ -141,6 +142,7 @@ class myViewController: UIViewController {
 			self.label.text = text
 		}
 	}
+
 }
 
 let myViewController = UIViewController()
@@ -161,7 +163,8 @@ According to Apple's [documentation](https://developer.apple.com/library/ios/doc
 ##### Example #####
 ```swift
 internal final class MyClass {
-	let notNilInstance = Instance()
+
+    let notNilInstance = Instance()
     weak var delegate: MyDelegate?
 
     func myFunction() {
@@ -173,6 +176,7 @@ internal final class MyClass {
 	    self?.doSomething() // weak variables are optionals
     	notNilInstance.doSomethingElse() // unowned variables are not
     }
+
 }
 ```
 
