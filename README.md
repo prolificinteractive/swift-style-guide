@@ -1,12 +1,13 @@
 ![Swift Style Guide](Swift_style_guide.jpg)
 
-## Table Of Contents ##
+# Table Of Contents
 
 * [Overview](#overview)
 * [Linter](#linter)
 * [Standards](#standards)
+	* [Naming Conventions](#naming-conventions)
 	* [File Structure](#file-structure)
-	* [Types](#types)
+	* [Types](#types-1)
 	* [Statement Termination](#statement-termination)
 	* [Variable Declaration](#variable-declaration)
 	* [Self](#self)
@@ -24,7 +25,7 @@
 * [Best Practices](BestPractices.md)
 
 
-## Overview ##
+# Overview
 
 This is Prolific's style guide for writing code in Swift. The purpose of this guide is to develop
 a universal standard for Swift code that makes our codebases consistent and easy to read. This guide aims for
@@ -36,7 +37,7 @@ The standards have been influenced by:
 * Xcode's defaults for code formatting
 * The general community
 
-#### Contributing
+### Contributing
 
 If you wish to contribute, feel free to submit a pull request or file an issue on this repo. In the pull request, be sure to discuss what problem you are intending
 to solve and the rationale to do so. When submitting a pull request, consider:
@@ -50,20 +51,20 @@ Make sure to consider the resources in the open-source Swift repo; specifically,
 [most-commonly rejected proposals](https://github.com/apple/swift-evolution/blob/master/commonly_proposed.md) in order to
 guide your design principals.
 
-## Linter ##
+# Linter
 
 In order to automate many of the rules here, we recommend using [our fork of Swiftlint](https://github.com/prolificinteractive/SwiftLint) in your Swift codebase.
 While the main fork of Swiftlint is based around the GitHub style guide for Swift, our fork has additional rules and corrections for rules specific to our
 style guide that you will not find in the GitHub one.
 
 
-## Standards ##
+# Standards
 
-### Naming Conventions ###
+## Naming Conventions
 
 The Apple Swift [API design guidelines](https://swift.org/documentation/api-design-guidelines/) promote clarity over brevity. Code should be concise, readable and clear at the point of use. However, having compact code that sacrifices clarity is a non-goal.
 
-#### Types ####
+### Types
 
 Write all type names with UpperCamelCase, function and variable names with lowerCamelCase.
 
@@ -81,11 +82,11 @@ productURL = NSURL()
 userID = "12345"
 ```
 
-#### Protocols ####
+### Protocols
 
 Protocol names describing something should be a noun: `Collection`, `Element`. Protocol names describing an ability should end with “ing” or “able”: `Evaluatable`, `Printable`, `Formatting`.
 
-#### Enums ####
+### Enums
 
 Enum cases start with lowerCamelCase.
 
@@ -98,7 +99,7 @@ enum Color {
 }
 ```
 
-#### Functions ####
+### Functions
 
 Name your function with words that describe its behavior. Here is an example with a function that removes an element at an index x.
 
@@ -159,7 +160,7 @@ x.subViews(color: y)
 x.nounCapitalize()
 ```
 
-### File structure ###
+## File structure
 
 You should not define multiple public/internal types (ie class, struct, enum) in the same file; each type should have its own file.
 
@@ -193,13 +194,13 @@ Each section above should be organized by accessibility:
 
 When implementing a protocol you should create an extension of your class that lives in the same file to separate the core logic of your class and your protocol implementation.
 
-#### Enum & Protocol ####
+### Enum & Protocol
 
 All enums should live in their own file, except in cases where the enum is declared as private. In cases where the enum is declared private, declare the enum at the top of the file, above the type declaration.
 
 *Rationale*: With enum and protocol types Swift allows defining functions and extensions. Because of that these types can become complex which is why they should be defined in their own file.
 
-#### Usage of MARK / TODO / FIXME ####
+### Usage of MARK / TODO / FIXME
 
 To help organize your files you may want to use pragma marks to clearly separate your functions, properties and extensions. For extensions, use one MARK per extension. For example, `// MARK: UITableViewDelegate Functions` instead of `// MARK: Extensions`.
 
@@ -211,7 +212,7 @@ Xcode is also able to display `TODO` and `FIXME` tags directly in the source nav
 
 Other conventional comment tags, such as `NOTE` are not recognized by Xcode.
 
-### Types ###
+## Types
 
 Prefer Swift native types over Objective-C types when possible. Because Swift types bridge to Objective-C, you should avoid types like NSString and NSNumber in favor of Int or String.
 
@@ -269,7 +270,7 @@ let height = CGRectGetHeight(rect)
 
 *Rationale*: Objective-C functions are making the code less readable, also using Swift equivalents will always help transitioning from a Swift version to another.
 
-#### Type Declarations ####
+### Type Declarations
 
 When declaring types, the colon should be placed immediately after the identifier followed by one space and the type name.
 
@@ -288,7 +289,7 @@ In all use-cases, the colon should be associated with the left-most item with no
 let myDictionary: [String: AnyObject] = ["String": 0]
 ```
 
-#### typealias ####
+### typealias
 
 Typealias declarations should precede any other type declaration.
 
@@ -343,7 +344,7 @@ class Example: Configurable {
 }
 ```
 
-#### Type Inference ####
+### Type Inference
 
 Prefer letting the compiler infer the type instead of explicitly stating it, wherever possible:
 
@@ -367,7 +368,7 @@ var name: String? = "John" // Compiler would infer this not to be optional, but 
 *Rationale* The compiler is pretty smart, and we should utilize it where necessary. It is generally obvious what the
 type is going to be in the instances above, so unless we need to be more explicit (as in the last examples above), it is better to omit unneeded words.
 
-### Statement Termination ###
+## Statement Termination
 
 Unlike Objective-C, omit the use of `;` to terminate statements. Instead, simply use new lines to indicate the end of a statement.
 
@@ -384,7 +385,7 @@ Avoid multiple statements on a single line.
 guard let obj = myObj else { print("Something went wrong"); return; } // Wrong! Instead, place each item on its own line.
 ```
 
-### Variable Declaration ###
+## Variable Declaration
 
 For declaring variables, favor `let` instead of `var` unless you need a mutable object or container.
 
@@ -405,7 +406,7 @@ func arrays() {
 
 ```
 
-### Self ###
+## Self
 
 Never use the `self` modifier except in cases where it is necessary for the compiler or to alleviate conflicts
 with other variable declarations.
@@ -442,7 +443,7 @@ class Object {
 In closures, think about: should `self` be `weak` instead of `strong`? Apple has even rejected a request to enforce use of `self` for this reason, [among others](http://ericasadun.com/2016/01/06/the-swift-evolution-proposal-se-0009-rejection/).
 
 
-### Bracket Syntax ###
+## Bracket Syntax
 
 For brackets, prefer the Xcode-default syntax of having the opening brace be on the same line as the statement opening it:
 
@@ -510,7 +511,7 @@ func doSomething() {
 *Rationale*: Simply put, this is the Xcode default and standard, and it's not worth fighting. This keeps things consistent
 across the board and makes our lives as developers considerably easier.
 
-### Force Unwrap ###
+## Force Unwrap
 
 Unless there is a situation that absolutely calls for it, usage of the force-unwrap operator `(!)` should
 be minimized, if not eliminated all together. With the many and varied ways of unwrapping optionals, it is
@@ -536,7 +537,7 @@ to exist for the lifetime of the view controller object:
 
 ```
 
-### Error Handling ###
+## Error Handling
 
 The emergence of `try / catch` in Swift 2 has added powerful ways to define and return errors when something fails. The emergence of `ErrorType`
 as well for defining errors makes error definitions much more convenient over the cumbersome `NSError`. Because of this, for functions that can have multiple
@@ -584,38 +585,38 @@ The above, while slightly more cumbersome, this has well-defined benefits:
 
 * The caller is able to explicitly determine why their call to the function failed and thus can take active steps to recover:
 
-```swift
-let result: Int
-do {
-    result = try multiplyEvens(3)
-} catch NumberError.NotEven {
-    return 0
-} catch NumberError.TooLarge {
-    print("The Number entered was too large! Try again.")
-    return -1
-} catch {
-    fatalError("Unhandled error occurred.")
-}
-
-return result
-```
+	```swift
+	let result: Int
+	do {
+	    result = try multiplyEvens(3)
+	} catch NumberError.NotEven {
+	    return 0
+	} catch NumberError.TooLarge {
+	    print("The Number entered was too large! Try again.")
+	    return -1
+	} catch {
+	    fatalError("Unhandled error occurred.")
+	}
+	
+	return result
+	```
 
 * Try/catch semantics allow the caller to still retain the old optional functionality if the error is not relevant and they only care about the outcome:
 
-```swift
-let result: Int? = try? multiplyEvens(1)
-```
+	```swift
+	let result: Int? = try? multiplyEvens(1)
+	```
 
 * Or, if the caller knows that it will not violate any of the parameters for a valid input:
 
-```swift
-let result: Int = try! multiplyEvens(2)
-```
+	```swift
+	let result: Int = try! multiplyEvens(2)
+	```
 
 So, even though we've now modified our API to use swift exceptions, we can still retain the old Objective-C functionality giving the caller the choice
 of how they wish to handle the result of this failable operation.
 
-#### NSError ####
+### NSError
 
 In general, you should avoid `NSError` in Swift in favor of defining your own `ErrorType`. However, in the event you do need to use `NSError` (for interop with Objective-C, for instance):
 
@@ -623,7 +624,7 @@ In general, you should avoid `NSError` in Swift in favor of defining your own `E
 * Define a list of the various error codes and what they translate to. These should be some sort of easily readable constant or enum value so that way the caller is able to determine what exactly failed.
 * In the userInfo, include _at least_ a localized description (`NSLocalizedDescriptionKey`) that accurately and concisely describes the nature of the error.
 
-### Access Modifiers ###
+## Access Modifiers
 
 Always specify access modifiers to top-level definitions. Do not specify them otherwise unless
 the modifier is needed:
@@ -654,7 +655,7 @@ internal func doSomething() {
 weak public var obj: Object?
 ```
 
-### Imports ###
+## Imports
 
 Import statements should be at the very top of the code file, and they should be listed in alphabetical order.
 
@@ -674,7 +675,7 @@ import UIKit
 @testable import MyLibrary
 ```
 
-### Structs & Classes ###
+## Structs & Classes
 
 In Swift, structs maintain value semantics which means their values are copied when assigned. Classes, on the other hand, act like pointers from C
 and Objective-C; they are called reference types and the internal data is shared amongst instances of assigning.
@@ -695,7 +696,7 @@ Swift structs also have other, tangible benefits as well:
 In general, you should favor structs and protocols over classes; even in cases where polymorphism would dictate the usage of a class, consider if you can
 achieve a similar result via protocols and extensions. This allows you to achieve polymorphism via *composition* rather than *inheritance*.
 
-### Nil Checking ###
+## Nil Checking
 
 Favor `if-let` checking over direct nil checking in all cases except when the result of this check is required:
 
@@ -721,7 +722,7 @@ func isError(error: Error?) -> Bool {
 
 For style suggestions regarding nil checking visit our [best practices](https://github.com/prolificinteractive/swift-style-guide/blob/master/BestPractices.md) section.
 
-### Implicit Getters ###
+## Implicit Getters
 
 When overriding only the getter of a property, omit the use of `get`:
 
@@ -742,9 +743,9 @@ var myInt: Int {
 For all other cases, specify the modifier as needed (`set`, `didSet`, etc.). This is compiler enforced.
 
 *Rationale* The getter is implied enough to make sense without having to make it explicitly. It also cuts down on
-unneccessary verbiage and spacing to make code clearer.
+unnecessary verbiage and spacing to make code clearer.
 
-### Enums ###
+## Enums
 
 For enum declarations, declare each enum case on a new line with its own `case` statement instead of a comma-separated list.
 
@@ -760,8 +761,8 @@ internal enum State {
 Prefer singular case for enum names instead of plural: `State` vs. `States`:
 
 ```swift
-var currentState = State.Open
-var previousState = States.Closed // Reads less clearly than the previous option.
+var currentState = State.open
+var previousState = States.closed // Reads less clearly than the previous option.
 ```
 
 For enums with raw values, declare the raw value on the same line as its declaration:
@@ -791,16 +792,16 @@ internal enum State {
 In cases where the enum's type name can be omitted, do so:
 
 ```swift
-let state = State.Open
+let state = State.open
 
-if state == .Closed { ... // Prefer .Closed instead of State.Closed
+if state == .closed { ... // Prefer .closed instead of State.closed
 ```
 
 
-### Use of `final` ###
+## Use of `final`
 
 Classes should always be marked as `final` unless they are being used as a base class for another type. In instances where a class can be subclassed,
-any function or variable that should not be overriden by a subclass should be diligently marked as `final`.
+any function or variable that should not be overridden by a subclass should be diligently marked as `final`.
 
 ```swift
 // Not built for inheritance.
@@ -834,7 +835,7 @@ internal final class SubClass: BaseClass {
 *Rationale* Subclassing in instances where the original class was not built to support subclasses can be a common source of bugs. Marking classes as `final`
 indicates that it was developed under the assumption that it would act on its own without regard for subclasses.
 
-### Documentation ###
+## Documentation
 
 Well documented code is critical to help other developers understand what the code is doing. Every **open**, **public** and **internal** types should be documented.
 Additionally developers should annotate any private piece of code when its behavior is not trivial using the regular comment syntax `//`.
