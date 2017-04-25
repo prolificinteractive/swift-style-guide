@@ -160,6 +160,20 @@ x.subViews(color: y)
 x.nounCapitalize()
 ```
 
+### Empty Return Types
+
+When specifying return type for functions, methods or closures that return no value, favor the type alias `Void` over empty tuple `()`.
+
+**Preferred:**
+```swift
+func performTask(_ completion: @escaping (Bool) -> Void)
+```
+
+**Not Preferred:**
+```swift
+func performTask(_ completion: @escaping (Bool) -> ())
+```
+
 ## File structure
 
 You should not define multiple public/internal types (ie class, struct, enum) in the same file; each type should have its own file.
