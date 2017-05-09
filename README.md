@@ -21,6 +21,7 @@
 	* [Implicit Getters](#implicit-getters)
 	* [Enums](#enums)
 	* [Use of `final`](#use-of-final)
+	* [Operators](#operators)
 	* [Documentation](#documentation)
 * [Best Practices](BestPractices.md)
 
@@ -848,6 +849,38 @@ internal final class SubClass: BaseClass {
 
 *Rationale* Subclassing in instances where the original class was not built to support subclasses can be a common source of bugs. Marking classes as `final`
 indicates that it was developed under the assumption that it would act on its own without regard for subclasses.
+
+## Operators
+
+### Operator Overloading
+
+Operator overloading is not recommended. Overloads often lead to ambiguous semantics, unintuitive behaviours and obscurities that are difficult for everyone to understand except the person who wrote them. Instead opt for less succinct, yet more descriptive function definitions throughout your code.
+
+### Custom Operators
+
+Be wary of defining entirely new operators, unless your use case specifically requires it. In some situations borrowing an operator that is defined in the standard library of another language makes sense, such as operators specific to high level scientific or mathematical problem solving. The behaviour of your custom operator should be intuitive and obvious. Its semantics should not conflict with existing Swift operators. 
+
+When defining a custom operator, be clear and use exhaustive documentation. Provide an example use of the operator within your documentation that others will easily understand. Define the new operator in the same file as the type definition that is making use of it.
+
+```swift
+/// Defines a postfix operator used to
+/// add 3 to the value of an integer.
+postfix operator +++
+
+/// Adds a value of 3 to an Integer 
+/// by appending the postfix operator.
+///
+/// Eg. let result = 3+++
+/// (result is now 6)
+///
+/// - Parameter n: integer to add 3 to
+/// - Returns: the value of n plus 3
+postfix func +++(n: Int) -> Int {
+    return n + 3
+}
+```
+
+Ensure there is always an existing function available that can be used as an alternative to the custom operator if required. Consumers of your type interface should be able to choose between using your custom operator as a shortcut, or using the function for further clarity.
 
 ## Documentation
 
