@@ -640,7 +640,7 @@ In general, you should avoid `NSError` in Swift in favor of defining your own `E
 
 ## Access Modifiers
 
-Specify access modifiers only when they are needed and required by the compiler. For types and functions with the access level of `internal`, do not explicitly specify the access modifier since all entities in Swift are `internal` by default.
+Specify access modifiers only when they are needed and required by the compiler. For `internal` types and functions, do not explicitly specify the access modifier since all entities in Swift are `internal` by default.
 
 ```swift
 final class Object {
