@@ -462,10 +462,10 @@ In closures, think about: should `self` be `weak` instead of `strong`? Apple has
 For brackets, prefer the Xcode-default syntax of having the opening brace be on the same line as the statement opening it:
 
 ```swift
-internal final class MyObject {
+final class MyObject {
 }
 
-internal enum MyEnum {
+enum MyEnum {
 }
 
 func doSomething() {
@@ -483,7 +483,7 @@ For type declarations, include a single space between the type declaration and t
 it:
 
 ```swift
-internal final class MyObject {
+final class MyObject {
 
 	let value = 0
 ```
@@ -491,7 +491,7 @@ internal final class MyObject {
 In addition, include a space before the type declaration's closing bracket:
 
 ```swift
-internal final class MyObject {
+final class MyObject {
 
 	let value = 0
 
@@ -576,7 +576,7 @@ is more Objective-C than Swift in its composition. The caller may not know which
 
 ```swift
 
-internal enum NumberError: ErrorType {
+enum NumberError: ErrorType {
 	case notEven
 	case tooLarge
 }
@@ -611,7 +611,7 @@ The above, while slightly more cumbersome, this has well-defined benefits:
 	} catch {
 	    fatalError("Unhandled error occurred.")
 	}
-	
+
 	return result
 	```
 
@@ -640,11 +640,10 @@ In general, you should avoid `NSError` in Swift in favor of defining your own `E
 
 ## Access Modifiers
 
-Always specify access modifiers to top-level definitions. Do not specify them otherwise unless
-the modifier is needed:
+Specify access modifiers only when they are needed and required by the compiler. For `internal` types and functions, do not explicitly specify the access modifier since all entities in Swift are `internal` by default.
 
 ```swift
-internal final class Object {
+final class Object {
 
     var myInt: Int
 
@@ -662,7 +661,7 @@ Further, the access modifier should always be presented first in the list before
 // Good!
 private unowned var obj: Object
 
-internal func doSomething() {
+func doSomething() {
 }
 
 // Wrong!
@@ -764,7 +763,7 @@ unnecessary verbiage and spacing to make code clearer.
 For enum declarations, declare each enum case on a new line with its own `case` statement instead of a comma-separated list.
 
 ```swift
-internal enum State {
+enum State {
 	case open
 	case closed
 	case pending
@@ -782,7 +781,7 @@ var previousState = States.closed // Reads less clearly than the previous option
 For enums with raw values, declare the raw value on the same line as its declaration:
 
 ```swift
-internal enum HTTPMethod: String {
+enum HTTPMethod: String {
 	case get = "GET"
 	case post = "POST"
 }
@@ -791,7 +790,7 @@ internal enum HTTPMethod: String {
 For any other functions or properties associated with the enum, place them after the last case item in the enum list:
 
 ```swift
-internal enum State {
+enum State {
 	case open
 	case closed
 	case pending
@@ -819,12 +818,12 @@ any function or variable that should not be overridden by a subclass should be d
 
 ```swift
 // Not built for inheritance.
-internal final class Object {
+final class Object {
 
 }
 
 // Purposefully utilizable as a base class
-internal class BaseClass {
+class BaseClass {
 
 	func doSomething () {
 	}
@@ -835,7 +834,7 @@ internal class BaseClass {
 
 }
 
-internal final class SubClass: BaseClass {
+final class SubClass: BaseClass {
 
 	override func doSomething() {
 		update()

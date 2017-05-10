@@ -133,7 +133,7 @@ var dataSource: [String] {
 Be careful to use *didSet* only on an initialized property. A typical example where it is dangerous to use *didSet* is to set an IBOutlet value before the view loaded.
 
 ```swift
-internal final class myViewController: UIViewController {
+final class myViewController: UIViewController {
 
 	@IBOutlet weak var label: UILabel!
 
@@ -163,7 +163,7 @@ According to Apple's [documentation](https://developer.apple.com/library/ios/doc
 #### Example
 
 ```swift
-internal final class MyClass {
+final class MyClass {
 
     let notNilInstance = Instance()
     weak var delegate: MyDelegate?
